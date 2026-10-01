@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>《Buku Teks Sejarah Tingkatan 5》— Perlembagaan Persekutuan</title>
+  <style>
+    :root {
+      --ink: #171411;
+      --muted: #6d6258;
+      --paper: #f8f2e7;
+      --paper-deep: #ece1cf;
+      --line: #d8c8af;
+      --red: #b9422f;
+      --blue: #245f73;
+      --green: #4d6f48;
+      --gold: #c2872d;
+      --white: #fffaf0;
+      --shadow: 0 18px 50px rgba(55, 38, 19, .14);
+
+      /* —— 主题化 token（默认 = 暖纸典藏；主题文件覆盖这些即可换肤，不碰布局）—— */
+      --font-body: "Songti SC", "Noto Serif CJK SC", Georgia, serif;
+      --font-display: "PingFang SC", "Microsoft YaHei", sans-serif;
+      --bg: radial-gradient(circle at 22% 12%, rgba(194, 135, 45, .18), transparent 28rem),
+            linear-gradient(135deg, #fbf6ec 0%, #efe1ca 100%);
+      --surface: rgba(255, 250, 240, .62);
+      --surface-strong: rgba(255, 250, 240, .72);
+      --bar-bg: rgba(248, 242, 231, .95);
+      --ink-soft: #3d332b;
+      --ink-soft-2: #44392f;
+      --tint-accent: rgba(194, 135, 45, .12);
+      --tint-accent-strong: rgba(194, 135, 45, .15);
+    }
+
+    /* —— 选中主题的变量覆盖 + 组件微调（Agent 注入对应 templates/themes/*.css）—— */
+    /* Six built-in themes; selection is remembered in this browser. */
+    [data-theme="minimal"]{--ink:#111;--muted:#666;--paper:#fff;--paper-deep:#f4f4f2;--line:#ddd;--red:#111;--blue:#2f4858;--green:#2f4858;--gold:#2f4858;--white:#fff;--bg:#fff;--surface:#fafaf8;--surface-strong:#f2f2ef;--bar-bg:rgba(255,255,255,.95);--ink-soft:#2a2a2a;--ink-soft-2:#333;--tint-accent:rgba(47,72,88,.1);--tint-accent-strong:rgba(47,72,88,.14);--font-body:Arial,"Microsoft YaHei",sans-serif;}
+    [data-theme="dark"]{--ink:#ece1cf;--muted:#a89a86;--paper:#221d18;--paper-deep:#2a241e;--line:#3a3128;--red:#e07a66;--blue:#7fb0c4;--green:#9bbf8e;--gold:#d9a441;--white:#fffaf0;--bg:linear-gradient(135deg,#1a1714,#221d18);--surface:rgba(58,49,40,.45);--surface-strong:rgba(58,49,40,.65);--bar-bg:rgba(34,29,24,.95);--ink-soft:#d8ccb8;--ink-soft-2:#c9bca6;--tint-accent:rgba(217,164,65,.14);--tint-accent-strong:rgba(217,164,65,.18);}
+    [data-theme="ink-wash"]{--ink:#1a1a1a;--muted:#7a7468;--paper:#f4f0e6;--paper-deep:#eae3d2;--line:#cfc6b0;--red:#9c2b1f;--blue:#3a352d;--green:#6b6354;--gold:#9c2b1f;--white:#fbf8ef;--bg:#f4f0e6;--surface:rgba(255,253,247,.5);--surface-strong:rgba(255,253,247,.7);--bar-bg:rgba(244,240,230,.95);--ink-soft:#3a352d;--ink-soft-2:#2e2a23;--font-body:"KaiTi","Songti SC",serif;--font-display:"Songti SC",serif;}
+    [data-theme="vintage-editorial"]{--ink:#1f1a15;--muted:#8c8176;--paper:#f5f3ee;--paper-deep:#ebe6dc;--line:#d9d1c4;--red:#c05a4a;--blue:#4a5568;--green:#6b7064;--gold:#b8893e;--white:#faf8f2;--bg:#f5f3ee;--surface:rgba(250,248,242,.55);--surface-strong:rgba(250,248,242,.72);--bar-bg:rgba(245,243,238,.95);--ink-soft:#3d3530;--ink-soft-2:#4a403b;--font-body:Arial,"Microsoft YaHei",sans-serif;}
+    [data-theme="paper-ink"]{--ink:#1a1a1a;--muted:#7a7268;--paper:#faf9f7;--paper-deep:#f0ece6;--line:#d4cdc2;--red:#b53a3a;--blue:#3d4f5f;--green:#5a6b56;--gold:#b53a3a;--white:#fdfbf7;--bg:#faf9f7;--surface:rgba(253,251,247,.5);--surface-strong:rgba(253,251,247,.7);--bar-bg:rgba(250,249,247,.95);--ink-soft:#2d2a26;--ink-soft-2:#36322d;--font-body:"KaiTi","Songti SC",serif;}
+    [data-theme="dark"] .tab[aria-selected="true"],[data-theme="dark"] .dd-toast{background:#0f0d0b}[data-theme="dark"] [data-source]::after{background:#ece1cf;color:#1a1714}.theme-picker{position:fixed;top:14px;right:112px;z-index:100;padding:6px 9px;border:1px solid var(--line);background:var(--bar-bg);color:var(--ink);font:12px var(--font-display)}
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: var(--font-body);
+    }
+
+    button { font: inherit; color: inherit; }
+
+    .page {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 32px 0 44px;
+      isolation: isolate;
+    }
+
+    /* ——— Hero ——— */
+    .hero {
+      min-height: 52vh;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 32px;
+      align-items: end;
+      padding: 48px 0 30px;
+    }
+
+    .eyebrow {
+      margin: 0 0 16px;
+      color: var(--red);
+      font: 700 14px/1.3 var(--font-display);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 760px;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: .98;
+      font-weight: 900;
+    }
+
+    .hero .lede {
+      margin: 22px 0 0;
+      max-width: 720px;
+      color: var(--ink-soft);
+      font-size: 21px;
+      line-height: 1.7;
+    }
+
+    .thesis {
+      border-left: 7px solid var(--red);
+      background: var(--surface-strong);
+      padding: 22px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .thesis strong {
+      display: block;
+      margin-bottom: 12px;
+      font: 800 18px/1.2 var(--font-display);
+    }
+
+    .thesis span {
+      display: block;
+      color: var(--ink-soft-2);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    /* ——— Tabs ——— */
+    .tabs {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: grid;
+      gap: 8px;
+      padding: 10px;
+      margin: 12px 0 28px;
+      border: 1px solid var(--line);
+      background: var(--bar-bg);
+    }
+
+    .tab {
+      min-height: 52px;
+      border: 0;
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      font: 800 16px/1.2 var(--font-display);
+      pointer-events: auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tab[aria-selected="true"] {
+      color: var(--white);
+      background: var(--ink);
+    }
+
+    /* ——— Panels ——— */
+    .panel {
+      display: none;
+      animation: rise .36s ease both;
+    }
+
+    .panel.active { display: block; }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      margin: 0 0 18px;
+      font: 900 30px/1.15 var(--font-display);
+    }
+
+    .section-lead {
+      margin: 0 0 24px;
+      color: var(--ink-soft);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    /* ——— Grid & Note cards ——— */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .note {
+      min-height: 220px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .note h3 {
+      margin: 0 0 12px;
+      font: 900 21px/1.2 var(--font-display);
+    }
+
+    .note p {
+      margin: 0;
+      color: var(--ink-soft-2);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .note .when {
+      margin-top: 10px;
+      color: var(--muted);
+      font: 14px/1.5 var(--font-display);
+    }
+
+    /* ——— Chain ——— */
+    .chain {
+      display: grid;
+      gap: 8px;
+      margin: 24px 0 8px;
+    }
+
+    .chain button {
+      min-height: 88px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      text-align: left;
+      font: 800 15px/1.35 var(--font-display);
+    }
+
+    .chain button.active {
+      color: var(--white);
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .explain {
+      min-height: 118px;
+      margin-top: 10px;
+      padding: 22px;
+      color: var(--ink-soft-2);
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    /* ——— Split / Selector ——— */
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .city-buttons {
+      display: grid;
+      gap: 10px;
+    }
+
+    .city-buttons button {
+      min-height: 58px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      text-align: left;
+      font: 800 17px/1.2 var(--font-display);
+    }
+
+    .city-buttons button.active {
+      color: var(--white);
+      background: var(--green);
+      border-color: var(--green);
+    }
+
+    .result {
+      padding: 28px;
+      min-height: 300px;
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .result .label {
+      color: var(--red);
+      font: 800 14px/1.2 var(--font-display);
+    }
+
+    .result h3 {
+      margin: 10px 0 12px;
+      font: 900 28px/1.2 var(--font-display);
+    }
+
+    .result p {
+      margin: 0 0 12px;
+      color: var(--ink-soft);
+      font-size: 18px;
+      line-height: 1.75;
+    }
+
+    /* ——— Questions ——— */
+    .questions {
+      display: grid;
+      gap: 12px;
+      counter-reset: q;
+    }
+
+    .question {
+      display: grid;
+      grid-template-columns: 54px 1fr;
+      gap: 14px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .question::before {
+      counter-increment: q;
+      content: counter(q);
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      color: var(--white);
+      background: var(--gold);
+      font: 900 22px/1 var(--font-display);
+    }
+
+    .question h3 {
+      margin: 0 0 4px;
+      font: 900 18px/1.25 var(--font-display);
+    }
+
+    .question p {
+      margin: 0;
+      color: var(--muted);
+      font: 15px/1.55 var(--font-display);
+    }
+
+    /* ——— Matrix ——— */
+    table.matrix {
+      width: 100%;
+      border-collapse: collapse;
+      font: 16px/1.5 var(--font-body);
+    }
+
+    .matrix th, .matrix td {
+      padding: 12px 10px;
+      border: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .matrix th {
+      background: var(--surface-strong);
+      font: 800 14px/1.3 var(--font-display);
+    }
+
+    .matrix td:first-child { font-weight: 700; }
+
+    /* row hover highlight（由 components.md JS 切换 class，颜色随主题） */
+    .matrix tbody tr.row-hi { background: var(--tint-accent); }
+
+    /* ——— Timeline ——— */
+    .timeline {
+      position: relative;
+      padding-left: 24px;
+      border-left: 2px solid var(--gold);
+    }
+
+    .timeline-item {
+      margin-bottom: 22px;
+      position: relative;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -30px;
+      top: 6px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .timeline-item .time {
+      color: var(--muted);
+      font: 700 13px/1.3 var(--font-display);
+    }
+
+    .timeline-item h3 {
+      margin: 4px 0 6px;
+      font: 900 18px/1.25 var(--font-display);
+    }
+
+    .timeline-item p {
+      margin: 0;
+      color: var(--ink-soft-2);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ——— Decision Tree ——— */
+    .decision details {
+      margin-bottom: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .decision summary {
+      padding: 14px 18px;
+      cursor: pointer;
+      font: 800 16px/1.3 var(--font-display);
+    }
+
+    .decision .branch {
+      padding: 0 18px 14px;
+      color: var(--ink-soft-2);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ——— Concept Map ——— */
+    .concept-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+
+    .concept-btn {
+      min-height: 52px;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      cursor: pointer;
+      font: 700 14px/1.3 var(--font-display);
+    }
+
+    .concept-btn.active {
+      color: var(--white);
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    /* 关联章节高亮（由 components.md JS 切换 class，颜色随主题） */
+    .chapter-row.concept-hi { background: var(--tint-accent-strong); }
+
+    /* ——— Chapter Map ——— */
+    .chapter-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .chapter-row {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 12px;
+      align-items: baseline;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .chapter-row .ch-label {
+      color: var(--red);
+      font: 700 14px/1.3 var(--font-display);
+    }
+
+    .chapter-row h3 {
+      margin: 0 0 2px;
+      font: 900 17px/1.25 var(--font-display);
+    }
+
+    .chapter-row .ch-role {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    /* ——— Decision Rules ——— */
+    .rules {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .rules li {
+      padding: 14px 18px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .rules li strong { color: var(--blue); }
+
+    .rules li em {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 14px;
+      font-style: normal;
+    }
+
+    /* ——— Transition ——— */
+    .transition {
+      margin: 28px 0 12px;
+      color: var(--ink-soft);
+      font-size: 17px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* ——— Story Card ——— */
+    .story {
+      border: 1px solid var(--line);
+      background: var(--surface-strong);
+      padding: 24px 28px;
+      margin: 18px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .story .story-label {
+      color: var(--red);
+      font: 700 13px/1.3 var(--font-display);
+      margin-bottom: 10px;
+    }
+
+    .story h3 {
+      margin: 0 0 14px;
+      font: 900 22px/1.2 var(--font-display);
+    }
+
+    .story p {
+      margin: 0 0 10px;
+      color: var(--ink-soft);
+      font-size: 18px;
+      line-height: 1.8;
+    }
+
+    .story .story-insight {
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px dashed var(--line);
+      color: var(--blue);
+      font: 700 17px/1.6 var(--font-display);
+    }
+
+    /* ——— Before/After ——— */
+    .before-after {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+      margin: 18px 0;
+    }
+
+    .ba-col {
+      padding: 22px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+    }
+
+    .ba-col.before { border-left: 4px solid var(--muted); }
+    .ba-col.after  { border-left: 4px solid var(--green); }
+
+    .ba-col .ba-label {
+      font: 700 13px/1.3 var(--font-display);
+      margin-bottom: 12px;
+    }
+
+    .ba-col.before .ba-label { color: var(--muted); }
+    .ba-col.after  .ba-label { color: var(--green); }
+
+    .ba-col h3 {
+      margin: 0 0 10px;
+      font: 900 18px/1.2 var(--font-display);
+    }
+
+    .ba-col p {
+      margin: 0;
+      color: var(--ink-soft-2);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ——— Accordion ——— */
+    .accordion details {
+      margin-bottom: 6px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+    }
+
+    .accordion summary {
+      padding: 16px 20px;
+      cursor: pointer;
+      font: 800 17px/1.3 var(--font-display);
+      list-style: none;
+    }
+
+    .accordion summary::-webkit-details-marker { display: none; }
+
+    .accordion summary::before {
+      content: "+";
+      display: inline-block;
+      width: 20px;
+      margin-right: 8px;
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 18px;
+    }
+
+    .accordion details[open] summary::before { content: "−"; }
+
+    .accordion .acc-body {
+      padding: 0 20px 16px 44px;
+      color: var(--ink-soft-2);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ——— Quote Card ——— */
+    .quote {
+      position: relative;
+      padding: 28px 32px 22px;
+      margin: 18px 0;
+      border-left: 4px solid var(--gold);
+      background: var(--surface-strong);
+      box-shadow: var(--shadow);
+    }
+
+    .quote::before {
+      content: "\201C";
+      position: absolute;
+      top: -8px;
+      left: 8px;
+      color: var(--gold);
+      font: 900 64px/1 var(--font-body);
+      opacity: .35;
+    }
+
+    .quote blockquote {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 19px;
+      line-height: 1.8;
+      font-style: normal;
+    }
+
+    .quote .q-source {
+      display: block;
+      margin-top: 10px;
+      color: var(--muted);
+      font: 13px/1.4 var(--font-display);
+    }
+
+    /* ——— Source markers and hover attribution ——— */
+    .note[data-source],
+    .story[data-source],
+    .question[data-source],
+    .timeline-item[data-source],
+    .ba-col[data-source],
+    .accordion details[data-source],
+    .quote[data-source],
+    .explain[data-source] {
+      position: relative;
+      padding-left: 26px;
+      border-left: 3px solid var(--line);
+      transition: border-color .2s;
+    }
+
+    .note[data-source]:hover,
+    .story[data-source]:hover,
+    .question[data-source]:hover,
+    .timeline-item[data-source]:hover,
+    .ba-col[data-source]:hover,
+    .accordion details[data-source]:hover,
+    .quote[data-source]:hover,
+    .explain[data-source]:hover {
+      border-left-color: var(--blue);
+    }
+
+    /* Tooltip on hover */
+    [data-source]::after {
+      content: attr(data-source);
+      position: absolute;
+      left: -4px;
+      bottom: calc(100% + 4px);
+      padding: 3px 8px;
+      background: var(--ink);
+      color: var(--white);
+      font: 11px/1.3 var(--font-display);
+      border-radius: 3px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .2s;
+      z-index: 3;
+    }
+
+    [data-source]:hover::after {
+      opacity: 1;
+    }
+
+    /* ——— Deep Dive (追问入口) ——— */
+    .deep-dive-btn {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      font: 700 14px/1 var(--font-display);
+      opacity: 0;
+      transition: opacity .2s;
+      z-index: 2;
+    }
+
+    .note:hover .deep-dive-btn,
+    .story:hover .deep-dive-btn,
+    .question:hover .deep-dive-btn,
+    .timeline-item:hover .deep-dive-btn,
+    .ba-col:hover .deep-dive-btn,
+    .accordion details:hover .deep-dive-btn,
+    .quote:hover .deep-dive-btn,
+    .explain:hover .deep-dive-btn {
+      opacity: .65;
+    }
+
+    .deep-dive-btn:hover { opacity: 1 !important; background: var(--blue); color: var(--white); border-color: var(--blue); }
+
+    /* ——— Deep Dive Popover ——— */
+    .dd-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(23, 20, 17, .35);
+      backdrop-filter: blur(2px);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .dd-overlay.active { display: flex; }
+
+    .dd-popover {
+      width: min(520px, calc(100% - 32px));
+      padding: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 8px;
+    }
+
+    .dd-popover .dd-title {
+      margin: 0 0 6px;
+      font: 900 22px/1.2 var(--font-display);
+    }
+
+    .dd-popover .dd-ctx {
+      margin: 0 0 16px;
+      color: var(--muted);
+      font: 13px/1.5 var(--font-display);
+    }
+
+    .dd-popover textarea {
+      width: 100%;
+      min-height: 72px;
+      padding: 10px 12px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font: 16px/1.6 var(--font-display);
+      color: var(--ink);
+      background: var(--white);
+      resize: vertical;
+      margin-bottom: 12px;
+    }
+
+    .dd-popover .dd-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dd-popover .dd-submit {
+      padding: 10px 22px;
+      border: 0;
+      border-radius: 4px;
+      background: var(--blue);
+      color: var(--white);
+      cursor: pointer;
+      font: 700 15px/1.3 var(--font-display);
+    }
+
+    .dd-popover .dd-cancel {
+      padding: 10px 18px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      background: transparent;
+      cursor: pointer;
+      font: 700 15px/1.3 var(--font-display);
+      color: var(--muted);
+    }
+
+    /* ——— Toast ——— */
+    .dd-toast {
+      position: fixed;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 14px 28px;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 6px;
+      font: 14px/1.4 var(--font-display);
+      opacity: 0;
+      transition: opacity .3s;
+      pointer-events: none;
+      z-index: 300;
+    }
+
+    .dd-toast.show { opacity: 1; }
+
+    /* ——— Footer ——— */
+    .footer {
+      margin-top: 34px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font: 14px/1.7 var(--font-display);
+    }
+
+    /* ——— Responsive ——— */
+    @media (max-width: 880px) {
+      .hero,
+      .split,
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 28px;
+      }
+
+      .tabs {
+        position: static;
+        grid-template-columns: 1fr;
+      }
+
+      .chain {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .concept-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 22px, 1180px);
+        padding-top: 18px;
+      }
+
+      h1 { font-size: 42px; }
+      .hero .lede { font-size: 18px; }
+      .chain { grid-template-columns: 1fr; }
+      .question { grid-template-columns: 1fr; }
+      .chapter-row { grid-template-columns: 1fr; }
+    }
+
+    /* ——— Component-specific styles injected by Agent ——— */
+    .tabs{grid-template-columns:repeat(4,1fr)}
+    .game-bridge{margin:54px 0 18px;padding:34px;border-top:4px solid var(--red);background:var(--surface-strong);text-align:center}.game-bridge h2{margin:0 0 12px;font:900 clamp(30px,4vw,48px)/1.05 var(--font-display)}.game-bridge p{max-width:700px;margin:0 auto 20px;color:var(--ink-soft);font-size:17px;line-height:1.7}.archive-button{padding:13px 20px;border:0;background:var(--ink);color:var(--white);cursor:pointer;font:800 16px/1.2 var(--font-display)}.archive-button:hover{background:var(--blue)}.archive-game{margin:18px 0 48px;padding:clamp(18px,4vw,34px);border:1px solid var(--line);background:var(--surface-strong);box-shadow:var(--shadow)}.archive-game[hidden]{display:none}.archive-top{display:flex;justify-content:space-between;gap:16px;align-items:flex-start;border-bottom:1px solid var(--line);padding-bottom:18px}.archive-kicker{margin:0 0 7px;color:var(--red);font:800 12px/1.2 var(--font-display);letter-spacing:.08em;text-transform:uppercase}.archive-top h2{margin:0;font:900 clamp(27px,4vw,42px)/1.1 var(--font-display)}.archive-progress{min-width:116px;padding:10px;border:1px solid var(--line);color:var(--muted);font:13px/1.4 var(--font-display);text-align:right}.archive-progress b{display:block;color:var(--ink);font-size:18px}.archive-intro{max-width:720px;margin:20px 0;color:var(--ink-soft);font-size:17px;line-height:1.7}.archive-instructions{margin:15px 0;padding:12px 15px;border-left:4px solid var(--gold);background:var(--tint-accent);font:15px/1.55 var(--font-display)}.archive-zones,.archive-options{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}.archive-zone{min-height:120px;padding:15px;border:1px dashed var(--line);background:var(--surface)}.archive-zone h3{margin:0;font:900 17px/1.3 var(--font-display)}.archive-zone p{color:var(--muted);font-size:14px;line-height:1.5}.archive-card-bank{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:14px 0}.archive-card,.archive-choice{padding:14px;border:1px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer;text-align:left;font:inherit}.archive-card:hover,.archive-choice:hover{border-color:var(--blue);transform:translateY(-1px)}.archive-card.selected{outline:3px solid var(--gold);outline-offset:1px}.archive-card strong{display:block;margin-bottom:5px;font:800 16px/1.25 var(--font-display)}.archive-card span{color:var(--muted);font:14px/1.45 var(--font-display)}.archive-choice{min-height:48px;font:800 15px/1.25 var(--font-display)}.archive-choice:disabled{opacity:.45;cursor:not-allowed}.archive-chip{display:block;margin-top:9px;padding:9px;border-left:3px solid var(--green);background:var(--tint-accent);font:700 14px/1.4 var(--font-display)}.archive-message{min-height:44px;margin:16px 0;padding:12px;border-left:3px solid var(--line);background:var(--surface);font:15px/1.5 var(--font-display)}.archive-message.good{border-left-color:var(--green)}.archive-message.warn{border-left-color:var(--red)}.archive-next{display:flex;justify-content:space-between;align-items:center;gap:12px}.timeline-slots{display:grid;gap:8px;margin:16px 0}.game-slot{display:grid;grid-template-columns:48px 74px 1fr;gap:10px;align-items:center;min-height:54px;padding:10px;border:1px dashed var(--line);background:var(--surface)}.game-slot .n{color:var(--muted);font:800 13px var(--font-display)}.game-slot .year{color:var(--red);font:900 19px var(--font-display)}.game-slot .title{font:15px/1.4 var(--font-display)}@media(max-width:680px){.game-bridge{padding:24px 17px}.archive-top{display:block}.archive-progress{margin-top:14px;text-align:left}.archive-zones,.archive-options,.archive-card-bank{grid-template-columns:1fr}.game-slot{grid-template-columns:32px 60px 1fr}}
+    .tool-dock{position:fixed;top:14px;right:14px;z-index:120;display:flex;gap:7px;align-items:center;padding:6px;border:1px solid var(--line);background:var(--bar-bg);box-shadow:0 8px 24px rgba(55,38,19,.1)}.tool-dock .theme-picker{position:static;inset:auto;margin:0;box-shadow:none;backdrop-filter:none}.support-toggle{padding:7px 10px;border:1px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer;font:900 14px/1.2 var(--font-display)}.support-toggle[aria-expanded="true"]{background:var(--ink);color:var(--white)}.reading-support-panel{position:fixed;top:67px;right:14px;z-index:121;width:min(350px,calc(100% - 28px));padding:18px;border:1px solid var(--line);background:var(--paper);box-shadow:var(--shadow);font-family:var(--font-display)}.reading-support-panel[hidden]{display:none}.support-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px;font-size:18px}.support-head button{border:0;background:transparent;color:var(--muted);font-size:25px;cursor:pointer}.reading-support-panel p{margin:0 0 13px;color:var(--muted);font-size:13px;line-height:1.55}.support-row{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);font-size:14px}.support-action,.support-mini,.read-section{border:1px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer;font:700 13px/1.2 var(--font-display)}.support-action{padding:7px 9px}.support-mini{padding:7px 8px;margin-left:4px}.support-action[aria-pressed="true"]{background:var(--blue);color:var(--white);border-color:var(--blue)}.read-section{width:100%;margin-top:12px;padding:11px;background:var(--ink);color:var(--white)}body.reading-support{--font-body:Arial,"Helvetica Neue","Microsoft YaHei",sans-serif;--font-display:Arial,"Helvetica Neue","Microsoft YaHei",sans-serif;letter-spacing:.025em;word-spacing:.08em}body.reading-support .lede,body.reading-support .section-lead,body.reading-support .note p,body.reading-support .timeline-item p,body.reading-support .ba-col p,body.reading-support .acc-body,body.reading-support .archive-intro{line-height:1.85}body.focus-ruler .panel.active p:hover,body.focus-ruler .panel.active li:hover{background:var(--tint-accent);outline:2px solid var(--gold);outline-offset:4px}body.reduce-motion *,body.reduce-motion *::before,body.reduce-motion *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}@media(max-width:620px){.tool-dock{max-width:calc(100% - 18px);top:8px;right:9px;gap:4px}.tool-dock .theme-picker{max-width:128px}.support-toggle{padding:7px 8px}.reading-support-panel{top:61px;right:9px}}
+    body.reading-support .lede,body.reading-support .section-lead,body.reading-support .note p,body.reading-support .timeline-item p,body.reading-support .ba-col p,body.reading-support .acc-body,body.reading-support .archive-intro{line-height:1.7}body.extra-spacing .lede,body.extra-spacing .section-lead,body.extra-spacing .note p,body.extra-spacing .timeline-item p,body.extra-spacing .ba-col p,body.extra-spacing .acc-body,body.extra-spacing .archive-intro{line-height:2}body.focus-ruler .panel.active p:hover,body.focus-ruler .panel.active li:hover{background:transparent;outline:none}body.focus-ruler .focus-current{position:relative;background:var(--tint-accent)!important;outline:3px solid var(--gold)!important;outline-offset:5px;border-radius:2px}body.focus-ruler .focus-current::after{content:"Panduan fokus";position:absolute;right:0;top:-1.6em;color:var(--muted);font:700 11px/1.2 var(--font-display);letter-spacing:.04em}.focus-hint{margin:9px 0 0;color:var(--muted);font:12px/1.5 var(--font-display)}
+    .learning-scene{margin:0 0 26px;padding:clamp(18px,3vw,28px);border:1px solid var(--line);background:var(--surface-strong);box-shadow:var(--shadow);font-family:var(--font-display)}
+    .scene-top{display:flex;justify-content:space-between;align-items:start;gap:16px;margin-bottom:18px}.scene-top h3{margin:2px 0 0;font:900 clamp(20px,2.5vw,28px)/1.15 var(--font-display)}.scene-kicker{margin:0;color:var(--red);font:800 11px/1.2 var(--font-display);letter-spacing:.12em}.scene-play{flex:none;padding:9px 13px;border:1px solid var(--ink);background:var(--ink);color:var(--white);cursor:pointer;font:800 13px/1.2 var(--font-display)}.scene-play:focus-visible,.scene-step:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+    .scene-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.scene-step{padding:9px 12px;border:1px solid var(--line);background:var(--white);color:var(--ink);cursor:pointer;text-align:left;font:800 13px/1.25 var(--font-display)}.scene-step[aria-current="step"]{border-color:var(--blue);background:var(--blue);color:var(--white)}.scene-caption{min-height:66px;margin:17px 0 0;padding:12px 15px;border-left:4px solid var(--gold);background:var(--tint-accent);color:var(--ink-soft);font:15px/1.55 var(--font-display)}
+    .source-map{display:grid;grid-template-columns:1fr 72px 1fr;align-items:center;gap:12px;min-height:250px;padding:18px;background:var(--paper-deep)}.source-stack{display:grid;gap:11px}.source-card,.source-result{position:relative;min-height:78px;padding:14px 16px;border:1px solid var(--line);background:var(--surface);opacity:.48;transform:translateY(0);transition:opacity .45s,transform .45s,border-color .45s,box-shadow .45s}.source-card strong,.source-result strong{display:block;margin-bottom:5px;font:900 16px/1.25 var(--font-display)}.source-card span,.source-result span{display:block;color:var(--muted);font:13px/1.4 var(--font-display)}.source-card.active,.source-result.active{opacity:1;border-color:var(--blue);box-shadow:0 7px 20px rgba(25,55,65,.12);transform:translateY(-3px)}.source-merge{height:3px;background:var(--line);position:relative}.source-merge:after{content:"";position:absolute;right:-1px;top:-6px;border-left:10px solid var(--blue);border-top:7px solid transparent;border-bottom:7px solid transparent}.source-merge i{display:block;width:0;height:100%;background:var(--blue);transition:width .65s}.source-map[data-step="2"] .source-merge i{width:100%}
+    .history-track{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:10px 0 22px;border-bottom:3px solid var(--line)}.history-track:before{content:"";position:absolute;left:0;bottom:-3px;width:var(--progress,0%);height:3px;background:var(--red);transition:width .65s}.history-stop{position:relative;text-align:center;opacity:.45;transition:opacity .35s,transform .35s}.history-stop:after{content:"";position:absolute;bottom:-30px;left:calc(50% - 7px);width:14px;height:14px;border:3px solid var(--line);border-radius:50%;background:var(--paper)}.history-stop.active{opacity:1;transform:translateY(-3px)}.history-stop.active:after{border-color:var(--red);background:var(--red)}.history-stop b{display:block;font:900 21px/1.2 var(--font-display)}.history-stop span{display:block;margin-top:5px;color:var(--muted);font:12px/1.3 var(--font-display)}.history-stage{display:grid;grid-template-columns:90px 1fr;gap:20px;align-items:center;min-height:180px;margin-top:32px;padding:20px;border:1px solid var(--line);background:var(--paper-deep)}.history-year{font:900 29px/1 var(--font-display);color:var(--red)}.history-stage h4{margin:0 0 8px;font:900 22px/1.2 var(--font-display)}.history-stage p{margin:0;color:var(--ink-soft);font:16px/1.6 var(--font-display)}
+    .change-map{position:relative;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;min-height:145px;align-items:center;padding:24px;border:2px dashed var(--green);background:var(--paper-deep);transition:border-color .6s}.change-node{min-height:95px;padding:14px 10px;border:1px solid var(--line);background:var(--surface);text-align:center;transition:transform .65s,opacity .65s,background .65s}.change-node b{display:block;margin:9px 0 5px;font:900 16px/1.2 var(--font-display)}.change-node small{color:var(--muted);font:12px/1.3 var(--font-display)}.change-node:before{content:"◆";color:var(--green);font-size:20px}.change-map[data-year="1965"]{border-color:var(--gold)}.change-map[data-year="1965"] .change-node.singapore{transform:translateY(33px);background:var(--tint-accent);opacity:.78;border-style:dashed}.change-map[data-year="1965"] .change-node.singapore:before{content:"↗";color:var(--gold)}.change-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.change-list span{padding:7px 10px;border:1px solid var(--line);background:var(--surface);font:700 12px/1.35 var(--font-display)}
+    @media(max-width:680px){.scene-top{display:block}.scene-play{margin-top:12px}.source-map{grid-template-columns:1fr;gap:8px;padding:12px}.source-merge{height:28px;width:3px;margin:auto}.source-merge:after{right:-6px;top:auto;bottom:-1px;border-top:10px solid var(--blue);border-left:7px solid transparent;border-right:7px solid transparent;border-bottom:0}.source-merge i{width:100%;height:0;transition:height .65s}.source-map[data-step="2"] .source-merge i{height:100%}.history-stop b{font-size:16px}.history-stop span{font-size:10px}.history-stage{grid-template-columns:1fr;gap:8px}.change-map{grid-template-columns:repeat(2,1fr);padding:12px}.change-map[data-year="1965"] .change-node.singapore{transform:translateY(14px)}}
+    .change-map[data-year="1965"]{border-color:transparent}.change-map[data-year="1965"]:after{content:"MALAYSIA";position:absolute;inset:8px 25% 8px 8px;border:2px dashed var(--green);display:flex;align-items:end;padding:0 0 4px 9px;color:var(--green);font:800 10px/1 var(--font-display);letter-spacing:.08em;pointer-events:none}.change-map[data-year="1965"] .change-node.singapore{transform:translateY(17px)}@media(max-width:680px){.change-map[data-year="1965"]:after{display:none}.change-map[data-year="1965"] .change-node:not(.singapore){border-color:var(--green)}.change-map[data-year="1965"] .change-node.singapore{transform:translateY(10px)}}
+    .learning-scene .scene-top{margin-bottom:16px}.learning-scene .scene-steps{margin:0 0 16px}.learning-scene .scene-step{min-height:44px}.source-layout,.change-layout{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);border:1px solid var(--line);background:var(--paper-deep)}.source-map{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-height:275px;align-content:center;padding:20px;border:0}.source-card,.source-result{min-height:104px;opacity:.6}.source-result{grid-column:1/-1;min-height:88px;border-top:3px solid var(--gold)}.source-result small{display:block;margin-bottom:5px;color:var(--muted);font:800 10px/1.2 var(--font-display);letter-spacing:.08em}.scene-explain{display:flex;flex-direction:column;justify-content:center;min-height:245px;padding:clamp(18px,3vw,32px);border-left:1px solid var(--line);background:var(--surface)}.scene-counter{margin-bottom:14px;color:var(--red);font:900 13px/1.2 var(--font-display)}.scene-explain h4{margin:0 0 13px;font:900 clamp(20px,2.4vw,27px)/1.2 var(--font-display)}.scene-explain p{margin:0;color:var(--ink-soft);font:16px/1.65 var(--font-display)}.source-merge{display:none}
+    .history-track{margin:12px 0 0}.history-track .scene-step,.history-track .scene-step[aria-current="step"]{min-height:70px;padding:6px;border:0;background:transparent;color:var(--ink);opacity:.5}.history-track .scene-step.active,.history-track .scene-step[aria-current="step"]{opacity:1}.history-track .scene-step[aria-current="step"] b{color:var(--red)}.history-stage{min-height:155px}.history-stage p{max-width:670px}
+    .change-map{grid-template-columns:minmax(0,3fr) minmax(0,1fr);gap:10px;min-height:275px;border:2px dashed var(--green);padding:20px}.change-core{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;align-items:center}.change-map[data-year="1965"]{border-color:transparent}.change-map[data-year="1965"]:after{display:none}.change-map[data-year="1965"] .change-core{outline:2px dashed var(--green);outline-offset:5px}.change-map[data-year="1965"] .change-node.singapore{transform:translateX(4px);border-color:var(--gold)}
+    .source-details{margin:0 0 24px;border:1px solid var(--line);background:var(--surface)}.source-details summary{padding:14px 17px;cursor:pointer;color:var(--blue);font:800 14px/1.3 var(--font-display)}.source-details summary:focus-visible{outline:3px solid var(--gold);outline-offset:3px}.source-details[open] summary{border-bottom:1px solid var(--line)}.source-details>.grid,.source-details>.timeline,.source-details>.before-after{margin:16px}.concept-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}.concept-tags span{padding:8px 10px;border:1px solid var(--line);background:var(--paper-deep);color:var(--ink);font:700 13px/1.35 var(--font-display)}
+    @media(max-width:750px){.source-layout,.change-layout{grid-template-columns:1fr}.scene-explain{min-height:0;border-left:0;border-top:1px solid var(--line)}.source-map,.change-map{min-height:0}.history-track .scene-step{padding:4px}.history-stop span{font-size:11px}}
+    .source-card,.source-result,.change-map[data-year="1965"] .change-node.singapore{opacity:1}.source-card:not(.active),.source-result:not(.active){border-color:var(--line)}.history-track .scene-step,.history-track .scene-step[aria-current="step"]{opacity:.78}.history-track .scene-step.active,.history-track .scene-step[aria-current="step"]{opacity:1}body.extra-spacing .scene-explain p,body.extra-spacing .history-stage p{line-height:2}
+    @media(max-width:520px){.change-map{grid-template-columns:1fr}.change-core{grid-template-columns:repeat(3,minmax(0,1fr))}.change-map[data-year="1965"] .change-node.singapore{transform:translateY(7px)}.source-map{grid-template-columns:1fr}}
+    .reading-bar{position:fixed;z-index:140;left:50%;bottom:12px;transform:translateX(-50%);width:min(760px,calc(100% - 24px));max-height:46vh;overflow:auto;padding:16px 18px;border:2px solid var(--blue);background:var(--paper);color:var(--ink);box-shadow:0 16px 42px rgba(20,20,20,.25);font-family:var(--font-display)}.reading-bar[hidden]{display:none}.reading-bar-head{display:flex;justify-content:space-between;align-items:start;gap:12px}.reading-bar-head strong{display:block;font:900 18px/1.2 var(--font-display)}.reading-location{display:block;margin-top:4px;color:var(--muted);font:13px/1.3 var(--font-display)}.reading-close{width:40px;height:40px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font:24px/1 var(--font-display)}.reading-preview{margin:11px 0;padding:10px 12px;border-left:4px solid var(--gold);background:var(--tint-accent);color:var(--ink-soft);font:15px/1.45 var(--font-display)}.reading-actions{display:flex;flex-wrap:wrap;gap:8px}.reading-actions button{min-height:43px;padding:8px 12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font:800 13px/1.2 var(--font-display)}.reading-actions .reading-play{border-color:var(--blue);background:var(--blue);color:var(--white)}[data-theme="dark"] .reading-actions .reading-play,[data-theme="dark"] .read-section{color:var(--paper)}.reading-actions button:disabled{opacity:.45;cursor:not-allowed}.reading-actions button:focus-visible,.reading-close:focus-visible{outline:3px solid var(--gold);outline-offset:2px}.reading-status{margin:10px 0 0;color:var(--muted);font:12px/1.35 var(--font-display)}body.reader-visible .page{padding-bottom:230px}body.reader-visible .reading-current{background:var(--tint-accent-strong)!important;outline:3px solid var(--gold)!important;outline-offset:5px;border-radius:2px}body.reader-visible .reading-current::after{content:none!important}@media(max-width:600px){.reading-bar{bottom:6px;width:calc(100% - 12px);padding:12px}.reading-preview{font-size:13px}.reading-actions button{flex:1 1 43%;padding:7px}body.reader-visible .page{padding-bottom:300px}}
+    .reading-ruler{position:fixed;z-index:90;left:0;right:0;top:46vh;height:2.3rem;border-top:2px solid var(--gold);border-bottom:2px solid var(--gold);background:rgba(233,168,53,.16);pointer-events:none}.reading-ruler[hidden]{display:none}.reading-ruler span{position:absolute;top:-22px;left:10px;padding:3px 7px;background:var(--gold);color:var(--paper);font:800 11px/1.2 var(--font-display);white-space:nowrap}.reading-rate-label{display:flex;align-items:center;gap:7px;min-height:43px;color:var(--ink-soft);font:700 13px/1.2 var(--font-display)}.reading-rate{min-height:39px;padding:5px 8px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:700 13px/1.2 var(--font-display)}.reading-preview{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:3;overflow:hidden}body.select-to-read .page .panel.active p,body.select-to-read .page .panel.active h2,body.select-to-read .page .panel.active h3,body.select-to-read .page .panel.active h4,body.select-to-read .page .hero p,body.select-to-read .page .hero h1,body.select-to-read .page .source-card,body.select-to-read .page .source-result,body.select-to-read .page .change-node{cursor:pointer}body.select-to-read .page .panel.active p:hover,body.select-to-read .page .panel.active h2:hover,body.select-to-read .page .panel.active h3:hover,body.select-to-read .page .panel.active h4:hover,body.select-to-read .page .source-card:hover,body.select-to-read .page .source-result:hover,body.select-to-read .page .change-node:hover{outline:2px dashed var(--gold);outline-offset:3px}@media(max-width:600px){.reading-ruler span{font-size:9px;max-width:calc(100vw - 20px);overflow:hidden;text-overflow:ellipsis}.reading-rate-label{flex:1 1 100%}}
+    .lesson-focus{margin:20px 0 0;padding:20px;border:1px solid var(--line);border-left:5px solid var(--gold);background:var(--surface);font-family:var(--font-display)}.lesson-focus h3{margin:0 0 12px;font:900 21px/1.25 var(--font-display)}.lesson-focus p{margin:12px 0 0;color:var(--ink-soft);font:15px/1.55 var(--font-display)}.lesson-pair{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center}.lesson-pair span{display:block;padding:14px;border:1px solid var(--line);background:var(--paper-deep);font:800 15px/1.45 var(--font-display)}.lesson-pair b{color:var(--red);font-size:23px}.history-relations{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}.history-relations[hidden]{display:none}.history-relations span{padding:10px;border:1px solid var(--line);background:var(--surface);font:800 13px/1.4 var(--font-display)}.history-relations b{display:block;margin-top:4px;color:var(--blue);font-size:14px}.change-visual{min-width:0}.change-detail{display:grid;gap:10px;align-content:center;min-height:275px;padding:20px;background:var(--paper-deep)}.change-detail[hidden],.change-map[hidden]{display:none}.change-detail-row{padding:14px;border-left:4px solid var(--blue);background:var(--surface);font:800 15px/1.45 var(--font-display)}.change-detail-row small{display:block;margin-top:4px;color:var(--muted);font:13px/1.45 var(--font-display)}.quiz-bridge{margin:34px 0 18px;padding:26px;border-top:4px solid var(--blue);background:var(--surface-strong);text-align:center}.quiz-bridge[hidden],.quiz-session[hidden],.quiz-return[hidden]{display:none}.quiz-bridge h2{margin:0 0 10px;font:900 clamp(27px,3.6vw,40px)/1.15 var(--font-display)}.quiz-bridge p{margin:0 auto 16px;max-width:650px;color:var(--ink-soft);font:16px/1.55 var(--font-display)}.quiz-session{margin:18px 0 52px;padding:clamp(18px,3vw,32px);border:1px solid var(--line);background:var(--surface-strong);box-shadow:var(--shadow);font-family:var(--font-display)}.quiz-top{display:flex;justify-content:space-between;gap:16px;align-items:start;padding-bottom:17px;border-bottom:1px solid var(--line)}.quiz-top p{margin:0;color:var(--red);font:800 12px/1.3 var(--font-display);letter-spacing:.08em}.quiz-top h2{margin:6px 0 0;font:900 clamp(25px,3.3vw,36px)/1.2 var(--font-display)}.quiz-count{min-width:88px;padding:8px;border:1px solid var(--line);text-align:center;font:800 16px/1.3 var(--font-display)}.quiz-question{margin:24px 0 18px;font:800 clamp(20px,2.5vw,26px)/1.35 var(--font-display)}.quiz-options{display:grid;gap:9px}.quiz-option{display:flex;gap:12px;align-items:start;width:100%;min-height:54px;padding:13px 15px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;text-align:left;font:700 16px/1.45 var(--font-display)}.quiz-option:hover:not(:disabled),.quiz-option:focus-visible{border-color:var(--blue);outline:2px solid var(--blue);outline-offset:1px}.quiz-option:disabled{cursor:default}.quiz-option .letter{flex:none;width:27px;color:var(--red);font-weight:900}.quiz-option.is-correct{border-color:var(--green);background:var(--tint-accent)}.quiz-option.is-wrong{border-color:var(--red)}.quiz-option .result-word{margin-left:auto;font:800 12px/1.3 var(--font-display)}.quiz-feedback{margin-top:19px;padding:18px;border-left:4px solid var(--gold);background:var(--paper-deep)}.quiz-feedback[hidden]{display:none}.quiz-feedback h3{margin:0 0 8px;font:900 19px/1.3 var(--font-display)}.quiz-feedback p{margin:0;color:var(--ink-soft);font:15px/1.6 var(--font-display)}.quiz-relation{display:flex;flex-wrap:wrap;gap:7px;align-items:center;margin-top:14px}.quiz-relation span{padding:7px 10px;border:1px solid var(--line);background:var(--surface);font:800 13px/1.35 var(--font-display)}.quiz-relation b{color:var(--red);font-size:18px}.quiz-actions{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin-top:18px}.quiz-actions button,.quiz-return{min-height:44px;padding:10px 14px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;font:800 14px/1.25 var(--font-display)}.quiz-actions .quiz-next,.quiz-actions .quiz-start{border-color:var(--ink);background:var(--ink);color:var(--white)}.quiz-source{display:block;margin-top:13px;color:var(--muted);font:12px/1.4 var(--font-display)}.quiz-return{position:fixed;z-index:110;left:16px;bottom:16px;border-color:var(--blue);background:var(--blue);color:var(--white);box-shadow:var(--shadow)}.quiz-review-focus{outline:3px solid var(--gold);outline-offset:5px}body.select-to-read .quiz-session .quiz-question,body.select-to-read .quiz-session .quiz-feedback p{cursor:pointer}body.select-to-read .quiz-session .quiz-question:hover,body.select-to-read .quiz-session .quiz-feedback p:hover{outline:2px dashed var(--gold);outline-offset:3px}@media(max-width:650px){.lesson-pair,.history-relations{grid-template-columns:1fr}.lesson-pair b{text-align:center;line-height:1}.quiz-top{display:block}.quiz-count{display:inline-block;margin-top:12px}.quiz-session{padding:18px}.quiz-option{font-size:15px}.quiz-return{left:8px;bottom:8px;max-width:calc(100% - 16px)}}
+  </style>
+</head>
+<body data-theme="warm-paper">
+  <div class="tool-dock" aria-label="Paparan dan sokongan membaca"><select id="themePicker" class="theme-picker" aria-label="Pilih tema halaman"><option value="warm-paper">Kertas klasik</option><option value="minimal">Minimal</option><option value="dark">Malam</option><option value="ink-wash">Dakwat</option><option value="vintage-editorial">Editorial</option><option value="paper-ink">Kertas &amp; dakwat</option></select><button id="supportToggle" class="support-toggle" aria-expanded="false" aria-controls="readingSupport">Aa</button></div>
+  <aside id="readingSupport" class="reading-support-panel" hidden aria-label="Sokongan membaca"><div class="support-head"><strong>Sokongan membaca</strong><button id="supportClose" aria-label="Tutup sokongan membaca">×</button></div><p>Laraskan paparan mengikut cara anda membaca. Tetapan ini pilihan dan disimpan pada peranti ini.</p><div class="support-row"><span>Jenis bacaan</span><button id="supportMode" class="support-action" aria-pressed="false">Mod lebih jelas</button></div><div class="support-row"><span>Saiz teks</span><div><button id="textSmaller" class="support-mini" aria-label="Kecilkan teks">A−</button><button id="textLarger" class="support-mini" aria-label="Besarkan teks">A+</button></div></div><div class="support-row"><span>Jarak baris</span><button id="lineSpacing" class="support-action" aria-pressed="false">Lebih lapang</button></div><div class="support-row"><span>Panduan fokus</span><button id="focusRuler" class="support-action" aria-pressed="false">Hidupkan</button></div><div class="support-row"><span>Gerakan</span><button id="reduceMotion" class="support-action" aria-pressed="false">Kurangkan</button></div><button id="readSection" class="read-section">Baca tab semasa</button></aside>
+  <main class="page">
+    <section class="hero" aria-labelledby="title"><div><p class="eyebrow">SEJARAH TINGKATAN 5 · BAB 2</p><h1 id="title">Perlembagaan<br>Persekutuan</h1><p class="lede">Sebuah peta belajar interaktif tentang asal-usul, penggubalan, ciri utama dan pindaan perlembagaan Malaysia.</p></div><aside class="thesis"><strong>Satu ayat penting</strong><span>Perlembagaan Persekutuan ialah undang-undang tertinggi yang menghubungkan warisan tempatan dengan struktur negara moden.</span></aside></section>
+    <nav class="tabs" aria-label="学习模块"><button class="tab" aria-selected="true" data-tab="asas">Asas</button><button class="tab" aria-selected="false" data-tab="kronologi">Kronologi</button><button class="tab" aria-selected="false" data-tab="ciri">Ciri utama</button><button class="tab" aria-selected="false" data-tab="pindaan">Pindaan</button></nav>
+    <section class="panel active" id="asas"><h2 class="section-title">Sebelum perlembagaan moden</h2><p class="section-lead">Undang-undang bukan perkara baharu: bab ini bermula dengan aturan Kesultanan Melayu, kemudian menunjukkan bagaimana unsur Inggeris disesuaikan.</p><div class="grid"><article class="note" data-source="Bab 2 Seksyen 2.1 · kira-kira hlm. 22–23"><h3>Warisan Melayu</h3><p>Hukum Kanun Melaka dan Undang-Undang Laut Melaka mempengaruhi undang-undang bertulis negeri Melayu yang lain.</p><p class="when">Lihat: Hukum Kanun Pahang, Undang-Undang Kedah, Johor dan 99 Perak.</p><button class="deep-dive-btn" onclick="openDeepDive('Undang-undang Negeri Melayu','Bab 2 Seksyen 2.1 · kira-kira hlm. 22–23')">?</button></article><article class="note" data-source="Bab 2 Seksyen 2.1 · kira-kira hlm. 23–24"><h3>Unsur Inggeris</h3><p>Charter of Justice digunakan di Negeri-negeri Selat; hanya piagam yang sesuai diguna pakai.</p><p class="when">Kata kunci: 1807, 1826, 1855.</p><button class="deep-dive-btn" onclick="openDeepDive('Charter of Justice','Bab 2 Seksyen 2.1 · kira-kira hlm. 23–24')">?</button></article><article class="note" data-source="Bab 2 Seksyen 2.1 · kira-kira hlm. 24"><h3>Jambatan ke 1957</h3><p>Institusi beraja diteruskan selepas merdeka dan disesuaikan dengan Raja Berperlembagaan serta Demokrasi Berparlimen.</p><p class="when">Ini menerangkan kesinambungan, bukan putusnya tradisi.</p><button class="deep-dive-btn" onclick="openDeepDive('Raja Berperlembagaan','Bab 2 Seksyen 2.1 · kira-kira hlm. 24')">?</button></article></div></section>
+    <section class="panel" id="kronologi"><h2 class="section-title">Daripada majlis negeri ke kemerdekaan</h2><p class="section-lead">Baca tarikh sebagai perubahan institusi: setiap langkah menambah bentuk kepada negara persekutuan yang merdeka.</p><div class="timeline"><article class="timeline-item" data-source="Bab 2 Seksyen 2.2 · kira-kira hlm. 25"><div class="time">1877</div><h3>Majlis Negeri Perak</h3><p>Mesyuarat pertama dipengerusikan Raja Muda Yusuf dan menjadi titik tolak penggubalan undang-undang negeri Perak.</p><button class="deep-dive-btn" onclick="openDeepDive('Majlis Negeri Perak','Bab 2 Seksyen 2.2 · kira-kira hlm. 25')">?</button></article><article class="timeline-item" data-source="Bab 2 Seksyen 2.2 · kira-kira hlm. 26"><div class="time">1946–1948</div><h3>Susunan perundangan dan Persekutuan</h3><p>Badan menggubal undang-undang berbeza mengikut kelompok negeri; Perjanjian Persekutuan Tanah Melayu 1948 pula menyentuh pentadbiran, raja, perundangan dan kewarganegaraan.</p><button class="deep-dive-btn" onclick="openDeepDive('Persekutuan Tanah Melayu 1948','Bab 2 Seksyen 2.2 · kira-kira hlm. 26')">?</button></article><article class="timeline-item" data-source="Bab 2 Seksyen 2.2 · kira-kira hlm. 27"><div class="time">1957</div><h3>Suruhanjaya Reid dan perlembagaan</h3><p>Perlembagaan Persekutuan Tanah Melayu berasaskan model Westminster dan berkuat kuasa pada 31 Ogos 1957.</p><button class="deep-dive-btn" onclick="openDeepDive('Suruhanjaya Reid','Bab 2 Seksyen 2.2 · kira-kira hlm. 27')">?</button></article></div></section>
+    <section class="panel" id="ciri"><h2 class="section-title">Dua lapisan yang saling melengkapi</h2><p class="section-lead">Pilih satu konsep untuk melihat bagaimana ciri tradisional dan moden bersama-sama membentuk negara.</p><div class="split"><div class="city-buttons"><button class="city-btn active" data-city="tradisi">Ciri tradisional</button><button class="city-btn" data-city="moden">Ciri moden</button><button class="city-btn" data-city="hubungan">Mengapa kedua-duanya penting</button></div><article class="result explain" id="cityResult" data-source="Bab 2 Seksyen 2.3 · kira-kira hlm. 28–29"><div class="label">PETA KONSEP</div><h3>Yang diwarisi</h3><p>Pemerintahan beraja, agama Islam, bahasa Melayu, serta kedudukan orang Melayu dan bumiputera dihuraikan sebagai ciri tradisional.</p><button class="deep-dive-btn" onclick="openDeepDive('Ciri tradisional','Bab 2 Seksyen 2.3 · kira-kira hlm. 28–29')">?</button></article></div><p class="transition">Perlembagaan bukan hanya menyenaraikan institusi. Ia menjelaskan cara warisan dan penyertaan rakyat berjalan dalam satu kerangka negara.</p><div class="concept-grid"><button class="concept-btn" data-links="ch02">Kesultanan</button><button class="concept-btn" data-links="ch02">Agama Islam</button><button class="concept-btn" data-links="ch02">Bahasa Melayu</button><button class="concept-btn" data-links="ch02">Kerajaan Persekutuan</button><button class="concept-btn" data-links="ch02">Demokrasi Berparlimen</button><button class="concept-btn" data-links="ch02">Kewarganegaraan</button></div></section>
+    <section class="panel" id="pindaan"><h2 class="section-title">Apabila negara berubah, perlembagaan disesuaikan</h2><p class="section-lead">Pindaan 1963 dan 1965 menunjukkan perlembagaan sebagai kerangka yang boleh menampung perubahan negara.</p><div class="before-after"><article class="ba-col before" data-source="Bab 2 Seksyen 2.4 · kira-kira hlm. 30"><div class="ba-label">1963 · PEMBENTUKAN MALAYSIA</div><h3>Struktur diperluas</h3><p>Pindaan menyesuaikan kemasukan Sarawak, Sabah dan Singapura. Buku menekankan Mahkamah Atasan, Mahkamah Tinggi Borneo dan Yang di-Pertua Negeri.</p><button class="deep-dive-btn" onclick="openDeepDive('Pindaan Perlembagaan 1963','Bab 2 Seksyen 2.4 · kira-kira hlm. 30')">?</button></article><article class="ba-col after" data-source="Bab 2 Seksyen 2.4 · kira-kira hlm. 31"><div class="ba-label">1965 · PEMISAHAN SINGAPURA</div><h3>Perkara Singapura dimansuhkan</h3><p>Selepas pemisahan Singapura, perkara berkaitan imigresen, kewangan, hubungan luar dan pertahanan dimansuhkan daripada Perlembagaan Malaysia.</p><button class="deep-dive-btn" onclick="openDeepDive('Pindaan Perlembagaan 1965','Bab 2 Seksyen 2.4 · kira-kira hlm. 31')">?</button></article></div><h3 class="section-title" style="margin-top:32px">Uji pemahaman</h3><div class="questions"><article class="question" data-source="Bab 2 · ulang kaji hlm. 34"><div><h3>Apakah maksud Perlembagaan Persekutuan?</h3><p>Jawab dengan statusnya sebagai undang-undang bertulis tertinggi serta panduan pemerintahan.</p></div><button class="deep-dive-btn" onclick="openDeepDive('Maksud Perlembagaan Persekutuan','Bab 2 · ulang kaji hlm. 34')">?</button></article><article class="question" data-source="Bab 2 · ulang kaji hlm. 34–35"><div><h3>Mengapa ciri tradisional dan moden perlu bergerak bersama?</h3><p>Hubungkan jawapan dengan kestabilan, kemajuan, warisan dan penyertaan rakyat.</p></div><button class="deep-dive-btn" onclick="openDeepDive('Ciri tradisional dan moden','Bab 2 · ulang kaji hlm. 34–35')">?</button></article></div></section>
+    <section class="game-bridge" aria-labelledby="game-title"><p class="eyebrow">SELEPAS PETA BELAJAR</p><h2 id="game-title">Uji jejak sejarah anda di Arkib Hidup</h2><p>Teruskan dengan empat papan permainan ringkas. Setiap tindakan menggunakan fakta yang baru anda lihat: susun bukti, bina kronologi, bezakan ciri, dan padankan pindaan.</p><button class="archive-button" id="startArchive">Mulakan Arkib →</button></section>
+    <section class="archive-game" id="arkibGame" aria-live="polite" hidden></section>
+    <section class="quiz-bridge" id="quizBridge" aria-labelledby="quizBridgeTitle" hidden><p class="eyebrow">SELEPAS UJI JEJAK</p><h2 id="quizBridgeTitle">Kuiz Perlembagaan Persekutuan</h2><p>Gunakan apa yang telah dipelajari untuk menjawab sepuluh soalan Bab 2.</p><button class="archive-button" id="startQuiz" type="button">Mula kuiz →</button></section>
+    <section class="quiz-session" id="quizSession" aria-label="Kuiz Perlembagaan Persekutuan" hidden></section>
+    <button class="quiz-return" id="quizReturn" type="button" hidden>Kembali ke soalan</button>
+    <footer class="footer">Berdasarkan petikan <em>Buku Teks Sejarah Tingkatan 5</em>, Bab 2 (hlm. buku 20–35). Sumber dipaparkan secara anggaran mengikut halaman buku.</footer>
+  </main>
+
+  <div class="dd-overlay" id="ddOverlay">
+    <div class="dd-popover">
+      <p class="dd-title" id="ddTitle"></p>
+      <p class="dd-ctx" id="ddCtx"></p>
+      <textarea id="ddInput" placeholder="输入你想追问的细节..."></textarea>
+      <div class="dd-actions">
+        <button class="dd-submit" id="ddSubmit">复制追问到剪贴板</button>
+        <button class="dd-cancel" id="ddCancel">取消</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="dd-toast" id="ddToast"></div>
+  <script>
+    // Deep dive popover
+    (function() {
+      var overlay = document.getElementById("ddOverlay");
+      var titleEl = document.getElementById("ddTitle");
+      var ctxEl = document.getElementById("ddCtx");
+      var input = document.getElementById("ddInput");
+      var toast = document.getElementById("ddToast");
+      var currentRef = "";
+
+      function showToast(msg) {
+        toast.textContent = msg;
+        toast.classList.add("show");
+        setTimeout(function() { toast.classList.remove("show"); }, 2000);
+      }
+
+      window.openDeepDive = function(conceptName, source, el) {
+        currentRef = source;
+        titleEl.textContent = "追问「" + conceptName + "」";
+        ctxEl.textContent = "来源：" + source + "  |  将生成一个结构化的追问 prompt 复制到剪贴板，贴回对话即可深入。";
+        input.value = "";
+        overlay.classList.add("active");
+        setTimeout(function() { input.focus(); }, 200);
+      };
+
+      document.getElementById("ddCancel").onclick = function() {
+        overlay.classList.remove("active");
+      };
+
+      overlay.onclick = function(e) {
+        if (e.target === overlay) overlay.classList.remove("active");
+      };
+
+      document.getElementById("ddSubmit").onclick = function() {
+        var q = input.value.trim();
+        if (!q) { showToast("请输入你的问题"); return; }
+        var bookName = document.title.split("《")[1].split("》")[0];
+        var concept = titleEl.textContent.replace("追问「","").replace("」","");
+        var prompt = "对《" + bookName + "》中「" + concept + "」，深入追问：" + q + "。\n\n请用 book-to-webpage skill 生成一个交互 HTML 页面来回答这个问题。知识库路径：" + document.title + "，出处：" + currentRef;
+        navigator.clipboard.writeText(prompt).then(function() {
+          overlay.classList.remove("active");
+          showToast("追问 prompt 已复制，贴回 Claude 对话即可");
+        }).catch(function() {
+          showToast("复制失败，请手动复制：" + prompt.substring(0, 60) + "...");
+        });
+      };
+    })();
+    (function(){var tabs=document.querySelectorAll('.tab');for(var i=0;i<tabs.length;i++){tabs[i].onclick=function(){for(var j=0;j<tabs.length;j++){tabs[j].setAttribute('aria-selected','false');}var panels=document.querySelectorAll('.panel');for(var k=0;k<panels.length;k++){panels[k].classList.remove('active');}this.setAttribute('aria-selected','true');var panel=document.getElementById(this.dataset.tab);if(panel){panel.classList.add('active');}};}var choices={tradisi:{title:'Yang diwarisi',body:'Pemerintahan beraja, agama Islam, bahasa Melayu, serta kedudukan orang Melayu dan bumiputera dihuraikan sebagai ciri tradisional.'},moden:{title:'Struktur negara moden',body:'Dalam sistem Kerajaan Persekutuan, Kerajaan Persekutuan dan Kerajaan Negeri mempunyai bidang kuasa tertentu. Sistem Demokrasi Berparlimen membolehkan rakyat memilih wakil melalui pilihan raya. Kewarganegaraan memberikan taraf yang sama kepada rakyat.'},hubungan:{title:'Saling melengkapi',body:'Bab ini menghuraikan gabungan ciri tradisional dan moden sebagai keunikan yang diperlukan bagi kestabilan serta kemajuan negara.'}};var buttons=document.querySelectorAll('.city-btn');for(var a=0;a<buttons.length;a++){buttons[a].onclick=function(){for(var b=0;b<buttons.length;b++){buttons[b].classList.remove('active');}this.classList.add('active');var item=choices[this.dataset.city];var target=document.getElementById('cityResult');if(target&&item){target.querySelector('h3').textContent=item.title;target.querySelector('p').textContent=item.body;}};}var picker=document.getElementById('themePicker');if(picker){var saved=localStorage.getItem('sejarah-theme');if(saved){document.body.setAttribute('data-theme',saved);picker.value=saved;}picker.onchange=function(){document.body.setAttribute('data-theme',this.value);localStorage.setItem('sejarah-theme',this.value);};}})();
+    (function(){
+      var panel=document.getElementById('ciri');
+      var target=document.getElementById('cityResult');
+      if(!panel||!target){return;}
+      var oldTransition=panel.querySelector('.transition');
+      var oldGrid=panel.querySelector('.concept-grid');
+      if(oldTransition){oldTransition.remove();}
+      if(oldGrid){oldGrid.remove();}
+      var tags=document.createElement('div');
+      tags.className='concept-tags';
+      target.appendChild(tags);
+      var labels={tradisi:['Pemerintahan beraja','Agama Islam','Bahasa Melayu','Kedudukan orang Melayu dan bumiputera'],moden:['Kerajaan Persekutuan','Demokrasi Berparlimen','Kewarganegaraan'],hubungan:['Warisan tempatan','Struktur Persekutuan','Penyertaan rakyat']};
+      function updateTags(){
+        var active=panel.querySelector('.city-btn.active');
+        var group=active&&labels[active.dataset.city]?labels[active.dataset.city]:labels.tradisi;
+        tags.textContent='';
+        for(var i=0;i<group.length;i++){var label=document.createElement('span');label.textContent=group[i];tags.appendChild(label);}
+      }
+      var choices=panel.querySelectorAll('.city-btn');
+      for(var j=0;j<choices.length;j++){choices[j].addEventListener('click',updateTags);}
+      updateTags();
+    })();
+    (function(){
+      var boards=[
+        {title:'Jejak asal undang-undang',source:'hlm. 22–24',intro:'Letakkan rekod pada jalur sejarah yang betul.',type:'sort',zones:['Warisan Melayu','Undang-undang Inggeris'],cards:[['Hukum Kanun Melaka','Undang-undang bertulis zaman Kesultanan Melayu Melaka.','Warisan Melayu'],['Undang-Undang Laut Melaka','Undang-undang maritim Kesultanan Melayu Melaka.','Warisan Melayu'],['Charter of Justice I · 1807','Mewujudkan mahkamah di Pulau Pinang.','Undang-undang Inggeris'],['Charter of Justice II · 1826','Menyatukan mahkamah di Singapura, Melaka dan Pulau Pinang.','Undang-undang Inggeris']]},
+        {title:'Susun jejak penggubalan',source:'hlm. 25–27',intro:'Klik peristiwa daripada paling awal ke paling baharu.',type:'timeline',cards:[['1877','Majlis Negeri Perak mula menggubal undang-undang negeri.'],['1946','Badan perundangan berbeza digunakan mengikut wilayah.'],['1948','Perjanjian Persekutuan Tanah Melayu menyentuh pentadbiran, raja, undang-undang dan kewarganegaraan.'],['1957','Perlembagaan Persekutuan Tanah Melayu berkuat kuasa pada 31 Ogos.']]},
+        {title:'Ciri yang saling melengkapi',source:'hlm. 28–29',intro:'Bezakan ciri tradisional daripada ciri moden.',type:'sort',zones:['Tradisional','Moden'],cards:[['Pemerintahan beraja','Institusi yang diteruskan dalam Raja Berperlembagaan.','Tradisional'],['Agama Islam','Peruntukan agama dalam kerangka perlembagaan.','Tradisional'],['Bahasa Melayu','Bahasa kebangsaan dan bahasa rasmi.','Tradisional'],['Kerajaan Persekutuan','Pembahagian kuasa antara Persekutuan dan Negeri.','Moden'],['Demokrasi Berparlimen','Rakyat memilih wakil melalui pilihan raya.','Moden'],['Kewarganegaraan','Taraf kewarganegaraan yang sama.','Moden']]},
+        {title:'Dua pindaan, dua perubahan',source:'hlm. 30–31',intro:'Padankan setiap perubahan dengan tahun pindaan yang dibincangkan.',type:'sort',zones:['Pindaan 1963','Pindaan 1965'],cards:[['Mahkamah Tinggi Borneo','Urusan kehakiman Sarawak dan Sabah.','Pindaan 1963'],['Yang di-Pertua Negeri','Jawatan bagi Sarawak dan Sabah.','Pindaan 1963'],['Struktur Mahkamah Atasan','Pelarasan susunan kehakiman ketika Malaysia dibentuk.','Pindaan 1963'],['Pemisahan Singapura','Perkara berkaitan Singapura dimansuhkan.','Pindaan 1965']]}
+      ];
+      var state={board:0,selected:null,placed:{},order:[],message:'Pilih satu kad untuk bermula.',kind:''};
+      var root=document.getElementById('arkibGame'); var start=document.getElementById('startArchive');
+      function esc(v){return String(v).replace(/[&<>]/g,function(c){return c==='&'?'&amp;':c==='<'?'&lt;':'&gt;';});}
+      function cardKey(card){return card[0];}
+      function renderGame(){if(!root){return;}var b=boards[state.board];var top='<div class="archive-top"><div><p class="archive-kicker">Arkib Perlembagaan · Papan '+(state.board+1)+'</p><h2>'+esc(b.title)+'</h2></div><div class="archive-progress"><b>'+(state.board+1)+' / '+boards.length+'</b>papan arkib</div></div><p class="archive-intro">'+esc(b.intro)+'</p><p class="archive-instructions">Sumber '+esc(b.source)+' · Kesilapan memberi petunjuk; anda boleh cuba semula.</p>';if(b.type==='timeline'){renderTimeline(b,top);return;}renderSort(b,top);}
+      function renderSort(b,top){var placed=state.placed[b.title]||{};var zones='';for(var i=0;i<b.zones.length;i++){var label=b.zones[i],chips='';for(var j=0;j<b.cards.length;j++){var c=b.cards[j];if(placed[cardKey(c)]===label){chips+='<span class="archive-chip">'+esc(c[0])+'</span>';}}zones+='<section class="archive-zone"><h3>'+esc(label)+'</h3>'+ (chips||'<p>Belum ada rekod di sini.</p>')+'</section>';}var cards='';for(var k=0;k<b.cards.length;k++){var item=b.cards[k];if(!placed[cardKey(item)]){cards+='<button class="archive-card '+(state.selected===cardKey(item)?'selected':'')+'" data-card="'+esc(cardKey(item))+'"><strong>'+esc(item[0])+'</strong><span>'+esc(item[1])+'</span></button>';}}var options='';for(var m=0;m<b.zones.length;m++){options+='<button class="archive-choice" data-zone="'+esc(b.zones[m])+'" '+(state.selected?'':'disabled')+'>'+esc(b.zones[m])+'</button>';}var done=cards==='',footer=done?'<button class="archive-button" data-next="1">Papan seterusnya →</button>':'<span>'+ (b.cards.length-Object.keys(placed).length)+' rekod belum diletakkan</span>';root.innerHTML=top+'<div class="archive-zones">'+zones+'</div><div class="archive-card-bank">'+cards+'</div><div class="archive-options">'+options+'</div><div class="archive-message '+state.kind+'">'+esc(state.message)+'</div><div class="archive-next">'+footer+'</div>';}
+      function renderTimeline(b,top){var slots='';for(var i=0;i<4;i++){var event=state.order[i];slots+='<div class="game-slot"><span class="n">0'+(i+1)+'</span><span class="year">'+(event?esc(event[0]):'—')+'</span><span class="title">'+(event?esc(event[1]):'Pilih peristiwa untuk slot ini.')+'</span></div>';}var cards='';for(var j=0;j<b.cards.length;j++){var c=b.cards[j],used=false;for(var k=0;k<state.order.length;k++){if(state.order[k][0]===c[0]){used=true;}}if(!used){cards+='<button class="archive-card" data-event="'+esc(c[0])+'"><strong>'+esc(c[0])+'</strong><span>'+esc(c[1])+'</span></button>';}}var action=state.order.length===4?'<button class="archive-button" data-check="1">Semak kronologi</button>':'<span>'+state.order.length+' / 4 peristiwa dipilih</span>';root.innerHTML=top+'<div class="timeline-slots">'+slots+'</div><div class="archive-card-bank">'+cards+'</div><div class="archive-message '+state.kind+'">'+esc(state.message)+'</div><div class="archive-next">'+action+'</div>';}
+      function resetBoard(){state.selected=null;state.order=[];state.message='Pilih satu kad untuk bermula.';state.kind='';}
+      if(start){start.onclick=function(){root.hidden=false;start.disabled=true;renderGame();root.scrollIntoView({behavior:'smooth',block:'start'});};}
+      if(root){root.onclick=function(e){var button=e.target.closest('button');if(!button){return;}var b=boards[state.board];if(button.dataset.card){state.selected=button.dataset.card;state.message='Sekarang pilih kategori yang sesuai untuk kad ini.';state.kind='';renderGame();return;}if(button.dataset.zone&&state.selected){var card=null;for(var i=0;i<b.cards.length;i++){if(cardKey(b.cards[i])===state.selected){card=b.cards[i];}}if(card&&card[2]===button.dataset.zone){if(!state.placed[b.title]){state.placed[b.title]={};}state.placed[b.title][state.selected]=button.dataset.zone;state.message='Tepat. Rekod ini diletakkan pada jalur yang betul.';state.kind='good';state.selected=null;}else{state.message='Belum tepat. Baca semula huraian pada kad, kemudian cuba lagi.';state.kind='warn';}renderGame();return;}if(button.dataset.event){for(var j=0;j<b.cards.length;j++){if(b.cards[j][0]===button.dataset.event){state.order.push(b.cards[j]);}}state.message='Teruskan dengan peristiwa seterusnya.';state.kind='';renderGame();return;}if(button.dataset.check){var good=true;for(var q=0;q<state.order.length;q++){if(state.order[q][0]!==b.cards[q][0]){good=false;}}if(good){state.message='Tepat. Kronologi ini bergerak dari 1877 ke 1957 seperti dalam bab.';state.kind='good';}else{state.order=[];state.message='Belum tepat. Mulakan dengan 1877 dan susun semula.';state.kind='warn';}renderGame();return;}if(button.dataset.next){state.board++;if(state.board>=boards.length){root.innerHTML='<div class="game-bridge"><p class="eyebrow">ARKIB LENGKAP</p><h2>Jejaknya sudah tersusun.</h2><p>Anda telah menyusun asal undang-undang, kronologi, ciri utama serta pindaan 1963 dan 1965.</p><button class="archive-button" data-restart="1">Main semula</button></div>';return;}resetBoard();renderGame();return;}if(button.dataset.restart){state.board=0;state.placed={};resetBoard();renderGame();}};}
+    })();
+    (function(){
+      var gameRoot=document.getElementById('arkibGame');
+      function improveArchiveGuidance(){
+        if(!gameRoot||gameRoot.hidden){return;}
+        var selected=gameRoot.querySelector('.archive-card.selected');
+        var instruction=gameRoot.querySelector('.archive-instructions');
+        if(instruction){
+          var words=selected?'Langkah 2 daripada 2: kad yang dipilih mempunyai garisan emas. Sekarang klik butang Letak di bawah untuk memasukkan kad itu ke kategori yang betul.':'Cara main: 1. Klik satu kad bukti di bawah. 2. Kad itu akan mendapat garisan emas. 3. Klik butang Letak di kategori yang betul. Ulang hingga semua rekod disusun.';
+          if(instruction.textContent!==words){instruction.textContent=words;}
+        }
+        var choices=gameRoot.querySelectorAll('.archive-choice');
+        for(var i=0;i<choices.length;i++){
+          var original=choices[i].dataset.original||choices[i].textContent;
+          choices[i].dataset.original=original;
+          var label=selected?'Letak di: '+original:'Pilih kad dahulu';
+          if(choices[i].textContent!==label){choices[i].textContent=label;}
+          choices[i].setAttribute('aria-label',selected?'Letak kad terpilih di '+original:'Pilih kad dahulu untuk mengaktifkan '+original);
+        }
+        var passed=gameRoot.querySelector('.archive-message.good');
+        var check=gameRoot.querySelector('[data-check]');
+        if(passed&&check){
+          check.removeAttribute('data-check');
+          check.setAttribute('data-next','1');
+          check.textContent='Papan seterusnya →';
+          setTimeout(function(){check.click();},450);
+        }
+      }
+      if(gameRoot){
+        var archiveObserver=new MutationObserver(function(){improveArchiveGuidance();});
+        archiveObserver.observe(gameRoot,{childList:true,subtree:true});
+        gameRoot.addEventListener('click',function(){setTimeout(improveArchiveGuidance,0);});
+      }
+    })();
+    (function(){
+      function mountScene(panelId,html){
+        var panel=document.getElementById(panelId);
+        if(!panel){return null;}
+        var scene=document.createElement('section');
+        scene.className='learning-scene';
+        scene.setAttribute('data-source',panelId==='asas'?'Bab 2 Seksyen 2.1 · kira-kira hlm. 22–24':panelId==='kronologi'?'Bab 2 Seksyen 2.2 · kira-kira hlm. 25–27':'Bab 2 Seksyen 2.4 · kira-kira hlm. 30–31');
+        scene.innerHTML=html;
+        var lead=panel.querySelector('.section-lead');
+        if(lead){lead.textContent=panelId==='asas'?'Pilih satu bahagian untuk melihat hubungan antara sumber sejarah dan kerangka 1957.':panelId==='kronologi'?'Pilih tahun pada garis masa untuk melihat perubahan yang berlaku pada ketika itu.':'Pilih 1963 atau 1965 untuk melihat perubahan keanggotaan dan pindaan yang berkaitan.';}
+        if(lead){lead.insertAdjacentElement('afterend',scene);}else{panel.insertBefore(scene,panel.firstChild);}
+        var original=panel.querySelector(panelId==='asas'?'.grid':panelId==='kronologi'?'.timeline':'.before-after');
+        if(original){
+          var details=document.createElement('details');
+          details.className='source-details';
+          var summary=document.createElement('summary');
+          summary.textContent='Huraian lanjut daripada buku teks';
+          panel.insertBefore(details,original);
+          details.appendChild(summary);
+          details.appendChild(original);
+        }
+        return scene;
+      }
+      function wireScene(scene,steps,paint){
+        if(!scene){return;}
+        var index=0;
+        var buttons=scene.querySelectorAll('.scene-step');
+        function show(next){index=next;for(var i=0;i<buttons.length;i++){buttons[i].setAttribute('aria-current',i===index?'step':'false');}paint(scene,index);}
+        for(var j=0;j<buttons.length;j++){(function(n){buttons[n].onclick=function(){show(n);};})(j);}
+        show(0);
+      }
+      var originSteps=[
+        {title:'Warisan undang-undang Melayu',body:'Hukum Kanun Melaka dan Undang-Undang Laut Melaka menjadi rujukan kepada undang-undang bertulis negeri Melayu yang lain.'},
+        {title:'Unsur Inggeris digunakan secara terpilih',body:'Charter of Justice digunakan di Negeri-negeri Selat. Undang-undang Inggeris yang sesuai dengan keadaan tempatan sahaja diguna pakai.'},
+        {title:'Kesinambungan ke 1957',body:'Warisan tempatan diteruskan dan disesuaikan dalam negara merdeka. Raja Berperlembagaan dan Demokrasi Berparlimen menunjukkan bagaimana institusi lama dan sistem pemerintahan moden bergerak bersama.'}
+      ];
+      var origin=mountScene('asas','<div class="scene-top"><div><p class="scene-kicker">PETA HUBUNGAN · HLM. 22–24</p><h3>Dari mana datangnya asas perlembagaan?</h3></div></div><div class="scene-steps" aria-label="Pilih bahagian sejarah"><button class="scene-step" type="button">Warisan Melayu</button><button class="scene-step" type="button">Unsur Inggeris</button><button class="scene-step" type="button">Kesinambungan 1957</button></div><div class="source-layout"><div class="source-map" role="img" aria-label="Dua sumber sejarah dan kesinambungannya pada 1957"><div class="source-card malay"><strong>Warisan Melayu</strong><span>Hukum Kanun Melaka · Undang-Undang Laut Melaka</span></div><div class="source-card british"><strong>Unsur Inggeris</strong><span>Charter of Justice · Negeri-negeri Selat</span></div><div class="source-result"><small>LATAR SEJARAH KEPADA</small><strong>Perlembagaan 1957</strong></div></div><div class="scene-explain" aria-live="polite"><span class="scene-counter"></span><h4></h4><p></p></div></div>');
+      wireScene(origin,originSteps,function(scene,index){var item=originSteps[index];scene.querySelector('.scene-counter').textContent=(index+1)+' / 3';scene.querySelector('.scene-explain h4').textContent=item.title;scene.querySelector('.scene-explain p').textContent=item.body;scene.querySelector('.malay').classList.toggle('active',index===0||index===2);scene.querySelector('.british').classList.toggle('active',index===1||index===2);scene.querySelector('.source-result').classList.toggle('active',index===2);});
+      var historySteps=[
+        {year:'1877',title:'Majlis Negeri Perak',body:'Mesyuarat pertama dipengerusikan Raja Muda Yusuf. Inilah titik tolak penggubalan undang-undang negeri Perak.'},
+        {year:'1946',title:'Badan perundangan mengikut wilayah',body:'Setiap kelompok negeri menggunakan badan penggubal undang-undang yang berbeza. Bandingkan tiga hubungan di bawah.'},
+        {year:'1948',title:'Perjanjian Persekutuan Tanah Melayu',body:'Perjanjian merangkumi pentadbiran, raja, perundangan dan kewarganegaraan.'},
+        {year:'1957',title:'Cadangan Suruhanjaya Reid menuju kemerdekaan',body:'Suruhanjaya Reid mengkaji dan mengesyorkan Perlembagaan Persekutuan Tanah Melayu sebagai persediaan kemerdekaan. Perlembagaan 1957 disesuaikan dengan model Westminster dan berkuat kuasa pada 31 Ogos 1957.'}
+      ];
+      var history=mountScene('kronologi','<div class="scene-top"><div><p class="scene-kicker">GARIS MASA · HLM. 25–27</p><h3>Bagaimana institusi berubah?</h3></div></div><div class="history-track" aria-label="Pilih tahun dalam garis masa"><button class="history-stop scene-step" type="button"><b>1877</b><span>Majlis Negeri</span></button><button class="history-stop scene-step" type="button"><b>1946</b><span>Badan perundangan</span></button><button class="history-stop scene-step" type="button"><b>1948</b><span>Perjanjian</span></button><button class="history-stop scene-step" type="button"><b>1957</b><span>Perlembagaan</span></button></div><div class="history-stage" aria-live="polite"><div class="history-year"></div><div><h4></h4><p></p></div></div>');
+      if(history){var relations=document.createElement('div');relations.className='history-relations';relations.hidden=true;relations.setAttribute('data-source','Bab 2 Seksyen 2.2 · hlm. 26');history.querySelector('.history-stage p').insertAdjacentElement('afterend',relations);}
+      wireScene(history,historySteps,function(scene,index){var item=historySteps[index];scene.querySelector('.history-year').textContent=item.year;scene.querySelector('.history-stage h4').textContent=item.title;scene.querySelector('.history-stage p').textContent=item.body;scene.querySelector('.history-track').style.setProperty('--progress',(12.5+index*25)+'%');var relations=scene.querySelector('.history-relations');relations.hidden=index!==1;if(index===1){relations.innerHTML='<span>NNS<b>Majlis Undangan Negeri</b></span><span>NNMB<b>Majlis Persekutuan</b></span><span>NNMTB<b>Majlis Negeri</b></span>';}var stops=scene.querySelectorAll('.history-stop');for(var i=0;i<stops.length;i++){stops[i].classList.toggle('active',i===index);}});
+      var changeSteps=[
+        {title:'1963 · Menyesuaikan negeri baharu',body:'Sarawak, Sabah dan Singapura menyertai Persekutuan. Pindaan 1963 memasukkan keperluan negeri baharu tanpa mengubah kedudukan negeri yang sedia ada.'},
+        {title:'1963 · Struktur Mahkamah Atasan',body:'Apabila Malaysia dibentuk, Mahkamah Persekutuan diwujudkan dalam struktur Mahkamah Atasan. Pindaan 1963 turut melibatkan Mahkamah Tinggi Borneo dan jawatan Yang di-Pertua Negeri.'},
+        {title:'1963 · Sarawak dan Sabah',body:'Mahkamah Tinggi Borneo mengurus soal kehakiman di Sarawak dan Sabah. Kedua-dua negeri diketuai oleh Yang di-Pertua Negeri.'},
+        {title:'1965 · Singapura berpisah',body:'Singapura keluar daripada Malaysia. Perkara perlembagaan berkaitan Singapura, termasuk imigresen, kewangan, hubungan luar dan pertahanan, dimansuhkan.'}
+      ];
+      var change=mountScene('pindaan','<div class="scene-top"><div><p class="scene-kicker">RAJAH PERUBAHAN · HLM. 30–31</p><h3>Apa yang berubah pada 1963 dan 1965?</h3></div></div><div class="scene-steps" aria-label="Pilih tahun pindaan"><button class="scene-step" type="button">1963 · Pembentukan</button><button class="scene-step" type="button">1965 · Pemisahan</button></div><div class="change-layout"><div class="change-map" data-year="1963" role="img" aria-label="Keanggotaan Malaysia pada 1963 dan 1965"><div class="change-core"><div class="change-node"><b>Tanah Melayu</b><small>asas Persekutuan</small></div><div class="change-node"><b>Sarawak</b><small>menyertai 1963</small></div><div class="change-node"><b>Sabah</b><small>menyertai 1963</small></div></div><div class="change-node singapore"><b>Singapura</b><small class="singapore-status">menyertai 1963</small></div></div><div class="scene-explain" aria-live="polite"><h4></h4><p></p></div></div>');
+      if(change){
+        change.querySelector('.scene-steps').innerHTML='<button class="scene-step" type="button">Tujuan 1963</button><button class="scene-step" type="button">Mahkamah Atasan</button><button class="scene-step" type="button">Sarawak &amp; Sabah</button><button class="scene-step" type="button">Pemisahan 1965</button>';
+        var map=change.querySelector('.change-map');
+        var visual=document.createElement('div');visual.className='change-visual';map.parentNode.insertBefore(visual,map);visual.appendChild(map);
+        var detail=document.createElement('div');detail.className='change-detail';detail.hidden=true;visual.appendChild(detail);
+      }
+      wireScene(change,changeSteps,function(scene,index){
+        var item=changeSteps[index],map=scene.querySelector('.change-map'),detail=scene.querySelector('.change-detail');
+        map.hidden=index===1||index===2;detail.hidden=!map.hidden;
+        map.dataset.year=index===3?'1965':'1963';
+        scene.querySelector('.singapore-status').textContent=index===3?'berpisah 1965':'menyertai 1963';
+        if(index===1){detail.innerHTML='<div class="change-detail-row">Mahkamah Persekutuan<small>Diwujudkan dalam struktur Mahkamah Atasan selepas pembentukan Malaysia.</small></div><div class="change-detail-row">Tiga perkara pindaan 1963<small>Struktur Mahkamah Atasan · Mahkamah Tinggi Borneo · Yang di-Pertua Negeri.</small></div>';}
+        if(index===2){detail.innerHTML='<div class="change-detail-row">Mahkamah Tinggi Borneo → Sarawak dan Sabah<small>Mengurus soal kehakiman di kedua-dua negeri.</small></div><div class="change-detail-row">Yang di-Pertua Negeri → ketua negeri<small>Jawatan bagi Sarawak dan Sabah selepas pembentukan Malaysia.</small></div>';}
+        scene.querySelector('.scene-explain h4').textContent=item.title;scene.querySelector('.scene-explain p').textContent=item.body;
+      });
+      var features=document.getElementById('ciri');
+      if(features){
+        var focus=document.createElement('article');
+        focus.className='lesson-focus';focus.id='lesson-ydpa';focus.setAttribute('data-source','Bab 2 Seksyen 2.3 · hlm. 29');
+        focus.innerHTML='<h3>Siapa memelihara kedudukan istimewa?</h3><div class="lesson-pair"><span>Yang di-Pertuan Agong</span><b aria-hidden="true">→</b><span>Kedudukan istimewa orang Melayu dan bumiputera Sarawak serta Sabah; kepentingan sah kaum lain</span></div><p>Selepas merdeka, perlembagaan memberi Yang di-Pertuan Agong tanggungjawab ini.</p>';
+        var split=features.querySelector('.split');if(split){split.insertAdjacentElement('afterend',focus);}
+      }
+    })();
+    (function(){
+      var panel=document.getElementById('readingSupport');
+      var toggle=document.getElementById('supportToggle');
+      var close=document.getElementById('supportClose');
+      var support=document.getElementById('supportMode');
+      var spacing=document.getElementById('lineSpacing');
+      var ruler=document.getElementById('focusRuler');
+      var motion=document.getElementById('reduceMotion');
+      var smaller=document.getElementById('textSmaller');
+      var larger=document.getElementById('textLarger');
+      var reader=document.getElementById('readSection');
+      var scale=Number(localStorage.getItem('sejarah-text-scale')||0);
+      function savedClass(name,key,button){var on=localStorage.getItem(key)==='true';document.body.classList.toggle(name,on);if(button){button.setAttribute('aria-pressed',on?'true':'false');}}
+      function applyScale(){var targets=document.querySelectorAll('.page p,.page h1,.page h2,.page h3,.page h4,.page li,.page button,.page summary,.page blockquote,.page .time,.page .year,.page .slot-title,.page .slot-year,.page .scene-counter,.page .source-card span,.page .source-result span,.page .change-node b,.page .change-node small');var multiplier=1+(scale*.12);for(var i=0;i<targets.length;i++){var target=targets[i];if(!target.dataset.baseFontSize){target.dataset.baseFontSize=getComputedStyle(target).fontSize;}if(scale===0){target.style.removeProperty('font-size');}else{target.style.fontSize=(parseFloat(target.dataset.baseFontSize)*multiplier)+'px';}}localStorage.setItem('sejarah-text-scale',String(scale));}
+      function flip(name,key,button){var on=!document.body.classList.contains(name);document.body.classList.toggle(name,on);localStorage.setItem(key,on?'true':'false');button.setAttribute('aria-pressed',on?'true':'false');}
+      savedClass('reading-support','sejarah-reading-support',support);savedClass('extra-spacing','sejarah-extra-spacing',spacing);savedClass('focus-ruler','sejarah-focus-ruler',ruler);savedClass('reduce-motion','sejarah-reduce-motion',motion);applyScale();
+      function show(open){if(!panel||!toggle){return;}panel.hidden=!open;toggle.setAttribute('aria-expanded',open?'true':'false');}
+      if(toggle){toggle.onclick=function(){show(panel.hidden);};}
+      if(close){close.onclick=function(){show(false);};}
+      if(support){support.onclick=function(){flip('reading-support','sejarah-reading-support',support);};}
+      if(spacing){spacing.onclick=function(){flip('extra-spacing','sejarah-extra-spacing',spacing);};}
+      if(ruler){ruler.onclick=function(){flip('focus-ruler','sejarah-focus-ruler',ruler);};}
+      if(motion){motion.onclick=function(){flip('reduce-motion','sejarah-reduce-motion',motion);};}
+      if(smaller){smaller.onclick=function(){scale=Math.max(-1,scale-1);applyScale();};}
+      if(larger){larger.onclick=function(){scale=Math.min(3,scale+1);applyScale();};}
+      if(reader){reader.textContent='Pilih teks untuk didengar';}
+    })();
+    (function(){
+      var focusToggle=document.getElementById('focusRuler');
+      var readButton=document.getElementById('readSection');
+      var supportPanel=document.getElementById('readingSupport');
+      var supportToggle=document.getElementById('supportToggle');
+      var speech=window.speechSynthesis;
+      var bar=document.createElement('aside');
+      bar.className='reading-bar';
+      bar.hidden=true;
+      bar.setAttribute('aria-label','Baca teks yang dipilih');
+      bar.innerHTML='<div class="reading-bar-head"><div><strong>Baca teks yang dipilih</strong><span class="reading-location">Klik teks pada halaman untuk mula</span></div><button type="button" class="reading-close" aria-label="Tutup bacaan suara">×</button></div><p class="reading-preview">Klik perenggan, tajuk atau label visual yang mahu didengar. Bacaan berhenti selepas teks itu.</p><div class="reading-actions"><button type="button" class="reading-play" disabled>Jeda</button><button type="button" class="reading-stop" disabled>Henti</button><label class="reading-rate-label">Kelajuan <select class="reading-rate" aria-label="Kelajuan bacaan"><option value="0.8">Perlahan</option><option value="1" selected>Biasa</option><option value="1.2">Laju</option></select></label></div><p class="reading-status" role="status">Pilih teks untuk didengar.</p>';
+      document.body.appendChild(bar);
+      var location=bar.querySelector('.reading-location');
+      var preview=bar.querySelector('.reading-preview');
+      var status=bar.querySelector('.reading-status');
+      var play=bar.querySelector('.reading-play');
+      var stop=bar.querySelector('.reading-stop');
+      var close=bar.querySelector('.reading-close');
+      var speed=bar.querySelector('.reading-rate');
+      var ruler=document.createElement('div');
+      ruler.className='reading-ruler';
+      ruler.hidden=true;
+      ruler.setAttribute('aria-hidden','true');
+      ruler.innerHTML='<span>Panduan fokus · tatal halaman di bawah jalur ini</span>';
+      document.body.appendChild(ruler);
+      var selected=null;
+      var chosenText='';
+      var readMode=false;
+      var mode='idle';
+      var serial=0;
+      var spokenText='';
+      function readableBlock(target){
+        if(!target||!target.closest){return null;}
+        var area=target.closest('.hero,.panel.active,.quiz-session');
+        if(!area){return null;}
+        var block=target.closest('p,h1,h2,h3,h4,li,blockquote,figcaption,.source-card,.source-result,.change-node,.history-year,.concept-tags span');
+        if(!block||!area.contains(block)||block.closest('button,details:not([open])')||!block.getClientRects().length){return null;}
+        return block.textContent.trim()?block:null;
+      }
+      function refresh(){
+        var tab=document.querySelector('.tab[aria-selected="true"]');
+        location.textContent=selected?(tab?tab.textContent.trim():'Bahagian ini')+' · teks yang anda klik':'Klik teks pada halaman untuk mula';
+        preview.textContent=spokenText||chosenText||'Klik perenggan, tajuk atau label visual yang mahu didengar. Bacaan berhenti selepas teks itu.';
+        stop.disabled=mode==='idle';
+        play.textContent=mode==='playing'?'Jeda':mode==='paused'?'Sambung':'Baca semula';
+        play.disabled=!selected||!speech||!window.SpeechSynthesisUtterance;
+        if(readButton){readButton.textContent=readMode?'Tutup bacaan suara':'Pilih teks untuk didengar';}
+      }
+      function showBar(){bar.hidden=false;document.body.classList.add('reader-visible','select-to-read');refresh();}
+      function select(item,text){
+        if(selected){selected.classList.remove('reading-current');}
+        selected=item;
+        chosenText=text||'';
+        if(item){item.classList.add('reading-current');}
+        refresh();
+      }
+      function stopSpeech(){
+        serial++;
+        if(speech){speech.cancel();}
+        mode='idle';
+        spokenText='';
+        status.textContent=selected?'Bacaan dihentikan. Klik teks lain atau pilih Baca semula.':'Pilih teks untuk didengar.';
+        refresh();
+      }
+      function speakSentence(sentences,position,run){
+        if(run!==serial){return;}
+        if(position>=sentences.length){mode='idle';spokenText='';status.textContent='Selesai. Klik teks lain untuk mendengarnya.';refresh();return;}
+        spokenText=sentences[position].trim();
+        refresh();
+        var utterance=new SpeechSynthesisUtterance(spokenText);
+        utterance.lang='ms-MY';
+        utterance.rate=Number(speed.value)||1;
+        var voices=speech.getVoices?speech.getVoices():[];
+        for(var i=0;i<voices.length;i++){if(/^ms(?:-|$)/i.test(voices[i].lang)){utterance.voice=voices[i];break;}}
+        utterance.onstart=function(){if(run!==serial){return;}mode='playing';if(position===0){status.textContent='Sedang membaca teks yang dipilih.';}refresh();};
+        utterance.onend=function(){if(run===serial){speakSentence(sentences,position+1,run);}};
+        utterance.onerror=function(){if(run===serial){mode='idle';status.textContent='Bacaan suara terhenti. Teks masih dipilih untuk dicuba semula.';refresh();}};
+        speech.speak(utterance);
+      }
+      function startSpeech(item,text){
+        if(!speech||!window.SpeechSynthesisUtterance){select(item,text);status.textContent='Bacaan suara tidak tersedia dalam pelayar ini. Teks yang dipilih masih disorot.';return;}
+        stopSpeech();
+        if(speech.paused){speech.resume();}
+        select(item,text);
+        var sentences=chosenText.match(/[^.!?]+[.!?]?/g)||[chosenText];
+        mode='playing';status.textContent='Sedang membaca teks yang dipilih.';refresh();
+        var run=serial;
+        speakSentence(sentences,0,run);
+      }
+      function toggleSpeech(){
+        if(mode==='playing'){speech.pause();mode='paused';status.textContent='Bacaan dijeda pada teks yang disorot.';refresh();return;}
+        if(mode==='paused'){speech.resume();mode='playing';status.textContent='Bacaan diteruskan.';refresh();return;}
+        if(selected){startSpeech(selected,chosenText);}
+      }
+      function closeReading(){stopSpeech();readMode=false;bar.hidden=true;document.body.classList.remove('reader-visible','select-to-read');select(null,'');}
+      if(readButton){readButton.onclick=function(){if(readMode){closeReading();return;}readMode=true;showBar();if(supportPanel&&supportToggle){supportPanel.hidden=true;supportToggle.setAttribute('aria-expanded','false');}status.textContent='Klik teks pada halaman. Bacaan tidak akan melompat ke teks lain.';refresh();};}
+      play.onclick=toggleSpeech;
+      stop.onclick=stopSpeech;
+      close.onclick=closeReading;
+      speed.onchange=function(){if(selected&&mode!=='idle'){startSpeech(selected,chosenText);}};
+      if(focusToggle){var hint=document.createElement('p');hint.className='focus-hint';hint.textContent='Panduan fokus ialah jalur tetap pada skrin. Tatal halaman supaya baris yang dibaca lalu di bawah jalur itu; ia tidak memulakan suara.';focusToggle.closest('.support-row').insertAdjacentElement('afterend',hint);focusToggle.addEventListener('click',function(){ruler.hidden=!document.body.classList.contains('focus-ruler');});}
+      document.addEventListener('click',function(event){
+        var choice=event.target.closest('.tab,.scene-step,.city-btn,.source-details summary,.archive-button');
+        if(choice){if(mode!=='idle'){stopSpeech();}if(readMode){select(null,'');status.textContent='Klik teks yang mahu didengar dalam paparan baharu.';}return;}
+        if(!readMode){return;}
+        var item=readableBlock(event.target);
+        if(!item){return;}
+        var selection=window.getSelection?window.getSelection():null;
+        var selectedWords=selection&&!selection.isCollapsed&&item.contains(selection.anchorNode)?selection.toString().trim():'';
+        startSpeech(item,selectedWords||item.textContent.trim());
+      });
+      document.addEventListener('keydown',function(event){if(event.key==='Escape'&&readMode){closeReading();}});
+      document.addEventListener('visibilitychange',function(){if(document.hidden&&mode!=='idle'){stopSpeech();}});
+      ruler.hidden=!document.body.classList.contains('focus-ruler');
+      refresh();
+    })();
+    (function(){
+      var bridge=document.getElementById('quizBridge');
+      var start=document.getElementById('startQuiz');
+      var root=document.getElementById('quizSession');
+      var archive=document.getElementById('arkibGame');
+      var back=document.getElementById('quizReturn');
+      if(!bridge||!start||!root||!archive||!back){return;}
+      var questions=[
+        {question:'Pada tahun 1946, badan manakah yang menggubal undang-undang bagi Negeri-negeri Melayu Bersekutu (NNMB)?',options:['Majlis Negeri','Majlis Persekutuan','Majlis Tertinggi','Majlis Undangan Negeri'],correct:1,hint:'Bezakan NNMB daripada Negeri-negeri Selat dan Negeri-negeri Melayu Tidak Bersekutu.',explain:'Pada tahun 1946, NNMB menggunakan Majlis Persekutuan. Negeri-negeri Selat menggunakan Majlis Undangan Negeri, manakala NNMTB menggunakan Majlis Negeri.',source:'Bab 2 Seksyen 2.2 · hlm. 26',review:{tab:'kronologi',step:1,label:'Kronologi · 1946'},visual:'<span>NNMB</span><b>→</b><span>Majlis Persekutuan</span>'},
+        {question:'Apakah antara kandungan penting Perjanjian Persekutuan Tanah Melayu 1948?',options:['Bahasa Melayu, ASEAN, pertahanan dan pilihan raya','Imigresen, hubungan luar, pertahanan dan kewangan Singapura','Pentadbiran, kuasa raja Melayu, perundangan dan kewarganegaraan','Mahkamah Tinggi Borneo, Yang di-Pertua Negeri dan Mahkamah Persekutuan'],correct:2,hint:'Cari empat bidang yang disebut bersama dalam perjanjian tahun 1948.',explain:'Perjanjian 1948 menyentuh pentadbiran, kuasa raja Melayu, perundangan dan kewarganegaraan.',source:'Bab 2 Seksyen 2.2 · hlm. 26',review:{tab:'kronologi',step:2,label:'Kronologi · 1948'},visual:'<span>1948</span><b>:</b><span>Pentadbiran</span><span>Kuasa raja</span><span>Perundangan</span><span>Kewarganegaraan</span>'},
+        {question:'Apakah peranan utama Suruhanjaya Reid menjelang kemerdekaan?',options:['Menggubal undang-undang negeri Perak pada 1877','Membentuk Mahkamah Tinggi Borneo','Mengurus pemisahan Singapura','Mengkaji dan mengesyorkan Perlembagaan Persekutuan Tanah Melayu'],correct:3,hint:'Fikirkan persediaan untuk Perlembagaan Persekutuan Tanah Melayu 1957.',explain:'Suruhanjaya Reid mengkaji dan mengesyorkan perlembagaan sebagai persediaan kemerdekaan. Perlembagaan Persekutuan Tanah Melayu berkuat kuasa pada 31 Ogos 1957.',source:'Bab 2 Seksyen 2.2 · hlm. 27; Arkib Negara Malaysia',review:{tab:'kronologi',step:3,label:'Kronologi · 1957'},visual:'<span>Suruhanjaya Reid</span><b>→</b><span>Cadangan perlembagaan</span><b>→</b><span>1957</span>'},
+        {question:'Ciri moden manakah yang membahagikan bidang kuasa antara Kerajaan Persekutuan dengan Kerajaan Negeri?',options:['Kerajaan Persekutuan','Pemerintahan beraja','Agama Islam','Bahasa Melayu'],correct:0,hint:'Cari ciri yang menerangkan dua peringkat kerajaan dan bidang kuasa masing-masing.',explain:'Kerajaan Persekutuan ialah ciri moden. Perlembagaan memperuntukkan bidang kuasa tertentu kepada Kerajaan Persekutuan dan Kerajaan Negeri.',source:'Bab 2 Seksyen 2.3 · hlm. 28',review:{tab:'ciri',feature:'moden',label:'Ciri utama · Ciri moden'},visual:'<span>Kerajaan Persekutuan</span><b>↔</b><span>Kerajaan Negeri</span>'},
+        {question:'Apakah tanggungjawab Yang di-Pertuan Agong terhadap kedudukan orang Melayu dan bumiputera selepas merdeka?',options:['Menghapuskan kepentingan kaum lain','Menentukan semua dasar ekonomi negeri','Memelihara kedudukan istimewa mereka serta kepentingan sah kaum lain','Menggantikan kuasa raja di semua negeri'],correct:2,hint:'Buku teks menyebut dua tanggungjawab yang dipelihara bersama.',explain:'Yang di-Pertuan Agong bertanggungjawab memelihara kedudukan istimewa orang Melayu dan bumiputera Sarawak serta Sabah, di samping kepentingan sah kaum lain.',source:'Bab 2 Seksyen 2.3 · hlm. 29',review:{tab:'ciri',focus:'lesson-ydpa',label:'Ciri utama · Tanggungjawab Yang di-Pertuan Agong'},visual:'<span>Yang di-Pertuan Agong</span><b>→</b><span>Kedudukan istimewa</span><span>Kepentingan sah kaum lain</span>'},
+        {question:'Bagaimanakah rakyat mengambil bahagian dalam Sistem Demokrasi Berparlimen?',options:['Rakyat melantik Yang di-Pertua Negeri','Rakyat memilih wakil melalui pilihan raya','Rakyat menggubal undang-undang negeri secara langsung','Rakyat menggantikan Mahkamah Persekutuan'],correct:1,hint:'Fikirkan cara rakyat memilih orang yang mewakili mereka.',explain:'Pilihan raya membolehkan rakyat memilih wakil pemimpin dan membentuk kerajaan. Sistem Demokrasi Berparlimen ialah ciri moden perlembagaan.',source:'Bab 2 Seksyen 2.3 · hlm. 29',review:{tab:'ciri',feature:'moden',label:'Ciri utama · Demokrasi Berparlimen'},visual:'<span>Rakyat</span><b>→</b><span>Pilihan raya</span><b>→</b><span>Wakil</span>'},
+        {question:'Mengapakah Perlembagaan Persekutuan Tanah Melayu 1957 dipinda selepas pembentukan Malaysia pada 1963?',options:['Menghapuskan pemerintahan beraja','Menyesuaikan peruntukan bagi negeri baharu','Menggantikan perlembagaan dengan undang-undang British','Menyerahkan semua kuasa negeri kepada Kerajaan Persekutuan'],correct:1,hint:'Perhatikan apa yang berubah apabila Sarawak, Sabah dan Singapura menyertai Persekutuan.',explain:'Pindaan 1963 menyesuaikan peruntukan bagi Sarawak, Sabah dan Singapura tanpa mengubah kedudukan negeri yang sedia ada.',source:'Bab 2 Seksyen 2.4 · hlm. 30',review:{tab:'pindaan',step:0,label:'Pindaan · Tujuan 1963'},visual:'<span>Negeri baharu menyertai</span><b>→</b><span>Peruntukan disesuaikan</span>'},
+        {question:'Antara berikut, yang manakah tiga perkara utama dalam Pindaan Perlembagaan 1963?',options:['Mahkamah Atasan, pilihan raya dan bahasa Melayu','Mahkamah Tinggi Borneo, kewangan dan imigresen','Yang di-Pertua Negeri, ASEAN dan kewarganegaraan','Struktur Mahkamah Atasan, Mahkamah Tinggi Borneo dan Yang di-Pertua Negeri'],correct:3,hint:'Dua perkara berkait susunan kehakiman; satu lagi berkait ketua negeri.',explain:'Buku teks menyenaraikan struktur Mahkamah Atasan, pembentukan Mahkamah Tinggi Borneo dan jawatan Yang di-Pertua Negeri sebagai tiga perkara utama pindaan 1963.',source:'Bab 2 Seksyen 2.4 · hlm. 30–31',review:{tab:'pindaan',step:1,label:'Pindaan · Mahkamah Atasan'},visual:'<span>1963</span><b>:</b><span>Mahkamah Atasan</span><span>Mahkamah Tinggi Borneo</span><span>Yang di-Pertua Negeri</span>'},
+        {question:'Apakah peranan Mahkamah Tinggi Borneo selepas pembentukan Malaysia?',options:['Mengurus soal kehakiman di Sarawak dan Sabah','Menggubal undang-undang untuk semua negeri','Mengurus pilihan raya di Malaysia Timur','Menentukan dasar luar Sarawak dan Sabah'],correct:0,hint:'Fokus pada fungsi mahkamah dan dua negeri Borneo.',explain:'Mahkamah Tinggi Borneo diwujudkan untuk mengurus soal kehakiman di Sarawak dan Sabah.',source:'Bab 2 Seksyen 2.4 · hlm. 30',review:{tab:'pindaan',step:2,label:'Pindaan · Sarawak dan Sabah'},visual:'<span>Mahkamah Tinggi Borneo</span><b>→</b><span>Kehakiman Sarawak dan Sabah</span>'},
+        {question:'Apakah kesan Pindaan Perlembagaan 1965 terhadap Singapura?',options:['Singapura mendapat autonomi tambahan dalam Malaysia','Singapura menjadi negeri beraja','Perkara berkaitan Singapura dimansuhkan daripada Perlembagaan Malaysia','Singapura diletakkan di bawah pentadbiran Sarawak'],correct:2,hint:'Fikirkan apa yang berlaku kepada peruntukan Singapura selepas negeri itu berpisah.',explain:'Selepas Singapura berpisah, perkara berkaitannya dimansuhkan daripada Perlembagaan Malaysia, termasuk imigresen, kewangan, hubungan luar dan pertahanan.',source:'Bab 2 Seksyen 2.4 · hlm. 31',review:{tab:'pindaan',step:3,label:'Pindaan · Pemisahan 1965'},visual:'<span>Singapura berpisah</span><b>→</b><span>Peruntukan berkaitan dimansuhkan</span>'}
+      ];
+      var state={queue:[],position:0,attempt:0,firstWrong:null,lastAnswer:null,resolved:false,correctFirst:0,missed:[],reviewing:false};
+      function esc(value){return String(value).replace(/[&<>"']/g,function(char){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char];});}
+      function current(){return questions[state.queue[state.position]];}
+      function scaleQuiz(){
+        var amount=Number(localStorage.getItem('sejarah-text-scale')||0);
+        if(!amount){return;}
+        var items=root.querySelectorAll('p,h2,h3,button,span,small');
+        for(var i=0;i<items.length;i++){items[i].style.fontSize=(parseFloat(getComputedStyle(items[i]).fontSize)*(1+amount*.12))+'px';}
+      }
+      function render(){
+        if(state.position>=state.queue.length){
+          root.removeAttribute('data-source');
+          var retry=state.missed.length?'<button class="archive-button" type="button" data-retry="1">Ulang soalan yang tersilap</button>':'';
+          root.innerHTML='<div class="quiz-top"><div><p>KUIZ SELESAI</p><h2>Jejak anda lengkap.</h2></div></div><p class="quiz-question">Betul pada cubaan pertama: '+state.correctFirst+' / '+state.queue.length+'</p><div class="quiz-actions">'+retry+'<button type="button" data-restart-quiz="1">Mula semula</button></div>';
+          scaleQuiz();return;
+        }
+        var q=current(),options='',letters=['A','B','C','D'];
+        root.setAttribute('data-source',q.source);
+        for(var i=0;i<q.options.length;i++){
+          var wrong=state.firstWrong===i||state.resolved&&state.lastAnswer===i&&i!==q.correct;
+          var correct=state.resolved&&i===q.correct;
+          var label=correct?'<span class="result-word">Jawapan tepat</span>':wrong?'<span class="result-word">Dicuba</span>':'';
+          options+='<button type="button" class="quiz-option'+(correct?' is-correct':'')+(wrong?' is-wrong':'')+'" data-answer="'+i+'"'+(state.resolved||state.firstWrong===i?' disabled':'')+'><span class="letter">'+letters[i]+'.</span><span>'+esc(q.options[i])+'</span>'+label+'</button>';
+        }
+        var feedback='',actions='';
+        if(state.attempt===1){feedback='<div class="quiz-feedback" role="status" tabindex="-1"><h3>Belum tepat. Cuba sekali lagi.</h3><p>'+esc(q.hint)+'</p></div>';}
+        if(state.resolved){
+          feedback='<div class="quiz-feedback" role="status" tabindex="-1"><h3>'+(state.firstWrong===null?'Tepat.':'Jawapan dan sebabnya')+'</h3><p>'+esc(q.explain)+'</p><div class="quiz-relation" aria-label="Hubungan konsep">'+q.visual+'</div><span class="quiz-source">Sumber: '+esc(q.source)+'</span></div>';
+          actions='<div class="quiz-actions"><button type="button" data-review="1">Lihat semula: '+esc(q.review.label)+'</button><button type="button" class="quiz-next" data-next-question="1">'+(state.position===state.queue.length-1?'Lihat keputusan':'Soalan seterusnya →')+'</button></div>';
+        }
+        var earlyFeedback=state.attempt===1?feedback:'';
+        var lateFeedback=state.attempt===1?'':feedback;
+        root.innerHTML='<div class="quiz-top"><div><p>LATIHAN BAB 2</p><h2>Kuiz Perlembagaan Persekutuan</h2></div><div class="quiz-count">'+(state.position+1)+' / '+state.queue.length+'</div></div><h3 class="quiz-question" tabindex="-1">'+esc(q.question)+'</h3>'+earlyFeedback+'<div class="quiz-options" role="group" aria-label="Pilihan jawapan">'+options+'</div>'+lateFeedback+actions;
+        scaleQuiz();
+      }
+      function focusQuestion(){var heading=root.querySelector('.quiz-question');if(heading){heading.focus();}}
+      function begin(queue){state.queue=queue.slice();state.position=0;state.attempt=0;state.firstWrong=null;state.lastAnswer=null;state.resolved=false;state.correctFirst=0;state.missed=[];state.reviewing=false;root.hidden=false;bridge.hidden=true;back.hidden=true;render();root.scrollIntoView({behavior:'smooth',block:'start'});focusQuestion();}
+      function advance(){state.position++;state.attempt=0;state.firstWrong=null;state.lastAnswer=null;state.resolved=false;render();root.scrollIntoView({behavior:'smooth',block:'start'});focusQuestion();}
+      function answer(index){
+        if(state.resolved||index<0||index>3||index===state.firstWrong){return;}
+        var q=current();state.lastAnswer=index;
+        if(state.attempt===0&&index===q.correct){state.correctFirst++;state.resolved=true;}
+        else if(state.attempt===0){state.attempt=1;state.firstWrong=index;state.missed.push(state.queue[state.position]);}
+        else{state.resolved=true;}
+        render();var feedback=root.querySelector('.quiz-feedback');if(feedback){feedback.focus();}
+      }
+      function review(){
+        var q=current(),target=q.review,tab=document.querySelector('.tab[data-tab="'+target.tab+'"]');
+        if(!tab){return;}tab.click();
+        var focus=null;
+        if(target.tab==='kronologi'){var history=document.querySelectorAll('#kronologi .learning-scene .scene-step');if(history[target.step]){history[target.step].click();}focus=document.querySelector('#kronologi .history-stage');}
+        if(target.tab==='pindaan'){var changes=document.querySelectorAll('#pindaan .learning-scene .scene-step');if(changes[target.step]){changes[target.step].click();}focus=document.querySelector('#pindaan .change-layout');}
+        if(target.feature){var feature=document.querySelector('#ciri .city-btn[data-city="'+target.feature+'"]');if(feature){feature.click();}focus=document.getElementById('cityResult');}
+        if(target.focus){focus=document.getElementById(target.focus);}
+        if(!focus){return;}
+        var old=document.querySelector('.quiz-review-focus');if(old){old.classList.remove('quiz-review-focus');}
+        focus.classList.add('quiz-review-focus');focus.scrollIntoView({behavior:'smooth',block:'center'});
+        state.reviewing=true;back.hidden=false;back.textContent='Kembali ke soalan '+(state.position+1);
+      }
+      function unlock(){if(archive.querySelector('[data-restart]')){bridge.hidden=false;}}
+      var observer=new MutationObserver(unlock);observer.observe(archive,{childList:true,subtree:true});unlock();
+      start.onclick=function(){var full=[];for(var i=0;i<questions.length;i++){full.push(i);}begin(full);};
+      back.onclick=function(){var old=document.querySelector('.quiz-review-focus');if(old){old.classList.remove('quiz-review-focus');}back.hidden=true;state.reviewing=false;root.scrollIntoView({behavior:'smooth',block:'start'});var feedback=root.querySelector('.quiz-feedback');if(feedback){feedback.focus();}};
+      root.onclick=function(event){
+        var button=event.target.closest('button');if(!button||!root.contains(button)){return;}
+        if(button.hasAttribute('data-answer')){answer(Number(button.dataset.answer));return;}
+        if(button.hasAttribute('data-next-question')){advance();return;}
+        if(button.hasAttribute('data-review')){review();return;}
+        if(button.hasAttribute('data-retry')){begin(state.missed);return;}
+        if(button.hasAttribute('data-restart-quiz')){start.click();}
+      };
+    })();
+  </script>
+</body>
+</html>
